@@ -15,3 +15,14 @@ class Model:
         """
           Add a line to the model
         """
+	
+    def addnode():
+	"""	
+	   Adds a node to the model
+	"""
+
+    def	remove(element):
+	"""	
+	   Removes the element from the model
+	"""
+

@@ -28,7 +28,7 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="GridSpice 0.1 documentation" href="../index.html" />
     <link rel="up" title="Python API Reference" href="index.html" />
-    <link rel="next" title="gridspice.account" href="gridspice.model.html" />
+    <link rel="next" title="gridspice.model" href="gridspice.model.html" />
     <link rel="prev" title="gridspice" href="gridspice.html" /> 
   </head>
   <body>
@@ -42,7 +42,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="gridspice.model.html" title="gridspice.account"
+          <a href="gridspice.model.html" title="gridspice.model"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="gridspice.html" title="gridspice"
@@ -61,8 +61,14 @@
 <span id="gridspice-account"></span><h1>gridspice.account<a class="headerlink" href="#module-gridspice.account" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="gridspice.account.Account">
-<em class="property">class </em><tt class="descclassname">gridspice.account.</tt><tt class="descname">Account</tt><big>(</big><em>title</em>, <em>author='Unknown'</em>, <em>keywords=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#gridspice.account.Account" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">gridspice.account.</tt><tt class="descname">Account</tt><big>(</big><em>email='null'</em><big>)</big><a class="headerlink" href="#gridspice.account.Account" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GridSpice account object contains the credentials for communication with the model server</p>
+<dl class="method">
+<dt id="gridspice.account.Account.deleteProject">
+<tt class="descname">deleteProject</tt><big>(</big><em>project</em><big>)</big><a class="headerlink" href="#gridspice.account.Account.deleteProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a project associated with this account</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="gridspice.account.Account.getProjects">
 <tt class="descname">getProjects</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.account.Account.getProjects" title="Permalink to this definition">¶</a></dt>
@@ -72,7 +78,19 @@
 <dl class="method">
 <dt id="gridspice.account.Account.logout">
 <tt class="descname">logout</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.account.Account.logout" title="Permalink to this definition">¶</a></dt>
-<dd><p>logs out the current user</p>
+<dd><p>Logs out the current user</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gridspice.account.Account.storeProject">
+<tt class="descname">storeProject</tt><big>(</big><em>project</em><big>)</big><a class="headerlink" href="#gridspice.account.Account.storeProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores a new project associated with this account</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gridspice.account.Account.updateProject">
+<tt class="descname">updateProject</tt><big>(</big><em>project</em><big>)</big><a class="headerlink" href="#gridspice.account.Account.updateProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a project associated with this account</p>
 </dd></dl>
 
 </dd></dl>
@@ -90,7 +108,7 @@
                         title="previous chapter">gridspice</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="gridspice.model.html"
-                        title="next chapter">gridspice.account</a></p>
+                        title="next chapter">gridspice.model</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/reference/gridspice.account.txt"
@@ -123,7 +141,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="gridspice.model.html" title="gridspice.account"
+          <a href="gridspice.model.html" title="gridspice.model"
              >next</a> |</li>
         <li class="right" >
           <a href="gridspice.html" title="gridspice"

@@ -12,3 +12,22 @@ class Project:
         self.author = author
         self.keywords = keywords
 
+    def getModels():
+	"""	
+   	   Gets the models associated with this project
+	"""
+
+    def	storeModel(model):
+	"""
+	   Stores a new model associated with this project
+	"""	
+
+    def updateModel(model):
+	"""
+	   Updates a model associated with this project
+	"""
+
+    def	deleteModel(model):
+	"""	
+	   Deletes a model associated with this project
+	"""
