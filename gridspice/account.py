@@ -30,24 +30,14 @@ class Account:
                                         raise ValueError("'" + email + "'"  + " is not a valid email address.")
                         conn.close()
 
-    def getProjects():
+    def getEmptyProjects():
         """
-           Gets the projects associated with this account
+           Gets the projects associated with this account (Projects need to be loaded)
         """
 
-    def storeProject(project):
+    def getId():
 	"""
-	   Stores a new project associated with this account
-	"""
-
-    def updateProject(project):
-	"""
-	   Updates a project associated with this account
-	"""
-
-    def deleteProject(project):
-	"""
-	   Deletes a project associated with this account
+	   Returns the account's id
 	"""
 
     def logout():

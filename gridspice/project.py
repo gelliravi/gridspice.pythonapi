@@ -1,33 +1,46 @@
 # Intro To Python:  Modules
 # book.py
 
+import account
+
 class Project:
 
     """
       The GridSpice project object keeps track of the group of models to be simulated, as well as global settings
       which pertain to all models in the simulation.
     """
-    def __init__(self, title, author="Unknown", keywords=[]):
-        self.title = title
-        self.author = author
-        self.keywords = keywords
-
-    def getModels():
+    def __init__(self, name, account):
+	self.name = name
+	self.accountId = account.getId()
+	
+    def getEmptyModels():
 	"""	
-   	   Gets the models associated with this project
+   	   Gets the models associated with this project (Models need to be loaded.)
 	"""
 
-    def	storeModel(model):
+    def load():
 	"""
-	   Stores a new model associated with this project
-	"""	
-
-    def updateModel(model):
-	"""
-	   Updates a model associated with this project
+	   fills in the other information to the project object
 	"""
 
-    def	deleteModel(model):
-	"""	
-	   Deletes a model associated with this project
+    def save():
 	"""
+	   saves this project
+	"""
+
+    def delete():
+	"""
+	   deletes this project
+	"""
+
+    def copy(account):
+	"""
+	   returns a copy of this project
+	"""
+
+    def getId():
+	"""
+	   returns this project's id
+	"""
+	return self.id
+

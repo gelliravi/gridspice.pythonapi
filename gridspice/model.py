@@ -5,24 +5,37 @@ class Model:
     """
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
-    def __init__(self, title, author="Unknown", keywords=[]):
-        self.title = title
-        self.author = author
-        self.keywords = keywords
+    def __init__(self, name, project):
+	self.name = name;
+	self.projectId = project.getId()	
 
-    
-    def addLine( ):
-        """
-          Add a line to the model
-        """
+    def load():
+	"""
+	   fills in the other information to the model object
+	"""
 	
-    def addnode():
-	"""	
-	   Adds a node to the model
+    def save():
+	"""
+	   saves this model
 	"""
 
+    def	delete():
+	"""
+	   deletes this model
+	"""
+
+    def	add (element):
+	"""
+	   Adds the element to the model
+	"""
+	
     def	remove(element):
 	"""	
 	   Removes the element from the model
 	"""
+	
+    def	copy(project):
+	"""
+	   Returns a copy of this model
+    	"""
 

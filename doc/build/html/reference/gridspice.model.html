@@ -61,24 +61,42 @@
 <span id="gridspice-model"></span><h1>gridspice.model<a class="headerlink" href="#module-gridspice.model" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="gridspice.model.Model">
-<em class="property">class </em><tt class="descclassname">gridspice.model.</tt><tt class="descname">Model</tt><big>(</big><em>title</em>, <em>author='Unknown'</em>, <em>keywords=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#gridspice.model.Model" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">gridspice.model.</tt><tt class="descname">Model</tt><big>(</big><em>name</em>, <em>project</em><big>)</big><a class="headerlink" href="#gridspice.model.Model" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GridSpice model contains the network model (transmission, distribution, etc)</p>
 <dl class="method">
-<dt id="gridspice.model.Model.addLine">
-<tt class="descname">addLine</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.model.Model.addLine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a line to the model</p>
+<dt id="gridspice.model.Model.add">
+<tt class="descname">add</tt><big>(</big><em>element</em><big>)</big><a class="headerlink" href="#gridspice.model.Model.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the element to the model</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="gridspice.model.Model.addnode">
-<tt class="descname">addnode</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.model.Model.addnode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a node to the model</p>
+<dt id="gridspice.model.Model.copy">
+<tt class="descname">copy</tt><big>(</big><em>project</em><big>)</big><a class="headerlink" href="#gridspice.model.Model.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of this model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gridspice.model.Model.delete">
+<tt class="descname">delete</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.model.Model.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>deletes this model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gridspice.model.Model.load">
+<tt class="descname">load</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.model.Model.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>fills in the other information to the model object</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="gridspice.model.Model.remove">
 <tt class="descname">remove</tt><big>(</big><em>element</em><big>)</big><a class="headerlink" href="#gridspice.model.Model.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the element from the model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gridspice.model.Model.save">
+<tt class="descname">save</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.model.Model.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves this model</p>
 </dd></dl>
 
 </dd></dl>
