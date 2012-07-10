@@ -29,6 +29,7 @@ class Project:
 		for x in config.DEFAULT_MODULE_NAMES:
 			self.modules[x] = ""
 
+		
 	def getEmptyModels(self):
 		"""	
 		Gets the models associated with this project (Models need to be loaded.)

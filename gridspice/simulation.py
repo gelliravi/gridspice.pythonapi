@@ -12,7 +12,7 @@ class Simulation:
         self.keywords = keywords
 
 
-    def logout():
+    def logout(self ):
         """
         logs out the current user
         """
