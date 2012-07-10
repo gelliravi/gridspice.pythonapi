@@ -41,7 +41,7 @@ class Account:
 			data = res.read()
 			jsonList = json.loads(data)
 			for x in jsonList:
-				proj = project.Project(x['name'], self)
+				proj = project.Project(x['name'], self, empty = 1)
 				proj.id = int(x['id'])
 				emptyProjects.append(proj)
 				outputString += "(" + repr(count) + ") " + x['name'] + "  "
