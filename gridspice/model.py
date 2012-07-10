@@ -7,34 +7,34 @@ class Model:
     """
     def __init__(self, name, project):
 	self.name = name;
-	self.projectId = project.getId()	
+	self.projectId = project.id	
 
-    def load():
+    def load(self):
 	"""
 	   fills in the other information to the model object
 	"""
 	
-    def save():
+    def save(self):
 	"""
 	   saves this model
 	"""
 
-    def	delete():
+    def	delete(self):
 	"""
 	   deletes this model
 	"""
 
-    def	add (element):
+    def	add (self, element):
 	"""
 	   Adds the element to the model
 	"""
 	
-    def	remove(element):
+    def	remove(self, element):
 	"""	
 	   Removes the element from the model
 	"""
 	
-    def	copy(project):
+    def	copy(self, project):
 	"""
 	   Returns a copy of this model
     	"""
