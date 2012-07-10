@@ -39,7 +39,7 @@ class Project:
 		fills in the other information to the project object
 		"""
 		conn = connection.create()
-		conn.request("GET", "/projects.json" + "?" + repr(self.id))
+		conn.request("GET", "/projects.json" + "?" + "id=" + repr(self.id))
 		res = conn.getresponse()
 		emptyProjects = []
 		if (res.status == 200 and res.reason == "OK"):
