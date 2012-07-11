@@ -40,11 +40,12 @@ class Project:
 		fills in the other information to the project object
 		"""
 		conn = connection.create()
-		conn.request("GET", "/projects.json" + "?" + "id=" + repr(self.id))
+		conn.request("GET", "/projects/ids" + "?" + "id=" + repr(self.id))
 		res = conn.getresponse()
 		emptyProjects = []
 		if (res.status == 200 and res.reason == "OK"):
 			data = res.read()
+			print data
 			jsonProj = json.loads(data)
 			self.email = jsonProj['email']
 			self.timeZone = jsonProj['timeZone']
@@ -56,20 +57,35 @@ class Project:
 		conn = connection.create()
 		params = urllib.urlencode(self.__dict__)
 		headers = {"Content-Type":"application/x-www-form-urlencoded", "Accept":"text/json"}
-		conn.request("POST", "/projects.json", params, headers)
+		conn.request("POST", "/projects/create", params, headers)
 		res = conn.getresponse()
 		if (res.status == 200 and res.reason == "OK"):
 			data = res.read()
 			result = int(data)
-			if (result == 1):
-				print self.name + " has been stored."
+			if (result > 0):
+				self.id = result
+				print self.name + " has been stored in the database."
 			else:
 				print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
 		else:
 			print "Error in the server."	
+			
 	def _update(self):
-		
-		print self.name + " has been updated."
+		conn = connection.create()
+		params = urllib.urlencode(self.__dict__)
+		headers = {"Content-Type":"application/x-www-form-urlencoded", "Accept":"text/json"}
+		conn.request("POST", "/projects/update", params, headers)
+		res = conn.getresponse()
+		if (res.status == 200 and res.reason == "OK"):
+			data = res.read()
+			result = int(data)
+			if (result > 0):
+				self.id = result
+				print self.name + " has been updated."
+			else:
+				print "Error updating."
+		else:
+			print "Error in the server."
 
 	def save(self):
 		"""
@@ -84,7 +100,25 @@ class Project:
 		"""
 		deletes this project
 		"""
-
+		if (self.id != None):
+			conn = connection.create()
+			params = urllib.urlencode({'id':repr(self.id)})
+			headers = {"Content-Type":"application/x-www-form-urlencoded", "Accept":"text/json"}
+			conn.request("POST", "/projects/destroy/" + repr(self.id), params, headers)
+			res = conn.getresponse()
+			if (res.status == 200 and res.reason == "OK"):
+				data = res.read()
+				result = int(data)
+				if (result == 1):
+					self.id = None
+					print self.name + " has been deleted from the database."
+				else:
+					print "Error deleting."
+			else:
+				print "Error in the server."
+		else:
+			print self.name + "has not yet been stored in the database"
+			
 	def copy(self, account):
 		"""
 		returns a copy of this project
