@@ -13,21 +13,22 @@ class Project:
 		The GridSpice project object keeps track of the group of models to be simulated, as well as global settings
 		which pertain to all models in the simulation.
 	"""
-	def __init__(self, name, account):
+	def __init__(self, name, account, empty = 0):
 		self.name = name
 		self.id = None
 		if (account.__class__.__name__ != 'Account'):
 			raise ValueError("Invalid account inputted.")
 		self.accountId = account.id
 		self.emailAddress = account.email
-		self.startDateTime = config.DEFAULT_DATE
-		self.endDateTime = config.DEFAULT_DATE
-		self.transmissionId = "-1"
-		self.climate = config.DEFAULT_CLIMATE
-		self.timeZone = config.DEFAULT_TIMEZONE	
-		self.modules = { }
-		for x in config.DEFAULT_MODULE_NAMES:
-			self.modules[x] = ""
+		if (empty == 0):
+			self.startDateTime = config.DEFAULT_DATE
+			self.endDateTime = config.DEFAULT_DATE
+			self.transmissionId = "-1"
+			self.climate = config.DEFAULT_CLIMATE
+			self.timeZone = config.DEFAULT_TIMEZONE	
+			self.modules = { }
+			for x in config.DEFAULT_MODULE_NAMES:
+				self.modules[x] = ""
 
 		
 	def getEmptyModels(self):
@@ -40,7 +41,7 @@ class Project:
 		fills in the other information to the project object
 		"""
 		conn = connection.create()
-		conn.request("GET", "/projects.json" + "?" + repr(self.id))
+		conn.request("GET", "/projects.json" + "?" + "id=" + repr(self.id))
 		res = conn.getresponse()
 		emptyProjects = []
 		if (res.status == 200 and res.reason == "OK"):
