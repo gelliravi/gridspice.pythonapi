@@ -20,10 +20,7 @@ class Project:
 			raise ValueError("Invalid account inputted.")
 		self.accountId = account.id
 		self.emailAddress = account.email
-		self.modules = { }
 		self.loaded = 0
-		for x in config.DEFAULT_MODULE_NAMES:
-			self.modules[x] = ""
 		if (empty == 0):
 			self.startDateTime = config.DEFAULT_DATE
 			self.endDateTime = config.DEFAULT_DATE
@@ -31,6 +28,9 @@ class Project:
 			self.climate = config.DEFAULT_CLIMATE
 			self.timeZone = config.DEFAULT_TIMEZONE	
 			self.loaded = 1
+			self.modules = { }
+			for x in config.DEFAULT_MODULE_NAMES:
+				self.modules[x] = ""
 
 	def getEmptyModels(self):
 		"""	
@@ -49,10 +49,14 @@ class Project:
 			data = res.read()
 			jsonProj = json.loads(data)
 			self.loaded = 1
-			self.email = jsonProj['email']
-			self.timeZone = jsonProj['timeZone']
-			self.startDateTime = jsonProj['startDateTime']
-			self.endDateTime = jsonProj['endDateTime']
+			self.email = jsonProj['email'].encode('ascii')
+			self.timeZone = jsonProj['timeZone'].encode('ascii')
+			self.startDateTime = jsonProj['startDateTime'].encode('ascii')
+			self.endDateTime = jsonProj['endDateTime'].encode('ascii')
+			self.modules = {}
+			tempModules = jsonProj['modules'];
+			for key in tempModules:
+				self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
 			print "Project " + self.name + " has been loaded."
 
 	def _store(self):
