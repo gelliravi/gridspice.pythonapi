@@ -20,15 +20,17 @@ class Project:
 			raise ValueError("Invalid account inputted.")
 		self.accountId = account.id
 		self.emailAddress = account.email
+		self.modules = { }
+		self.loaded = 0
+		for x in config.DEFAULT_MODULE_NAMES:
+			self.modules[x] = ""
 		if (empty == 0):
 			self.startDateTime = config.DEFAULT_DATE
 			self.endDateTime = config.DEFAULT_DATE
 			self.transmissionId = "-1"
 			self.climate = config.DEFAULT_CLIMATE
 			self.timeZone = config.DEFAULT_TIMEZONE	
-			self.modules = { }
-			for x in config.DEFAULT_MODULE_NAMES:
-				self.modules[x] = ""
+			self.loaded = 1
 
 	def getEmptyModels(self):
 		"""	
@@ -45,8 +47,8 @@ class Project:
 		emptyProjects = []
 		if (res.status == 200 and res.reason == "OK"):
 			data = res.read()
-			print data
 			jsonProj = json.loads(data)
+			self.loaded = 1
 			self.email = jsonProj['email']
 			self.timeZone = jsonProj['timeZone']
 			self.startDateTime = jsonProj['startDateTime']
@@ -71,21 +73,24 @@ class Project:
 			print "Error in the server."	
 			
 	def _update(self):
-		conn = connection.create()
-		params = urllib.urlencode(self.__dict__)
-		headers = {"Content-Type":"application/x-www-form-urlencoded", "Accept":"text/json"}
-		conn.request("POST", "/projects/update", params, headers)
-		res = conn.getresponse()
-		if (res.status == 200 and res.reason == "OK"):
-			data = res.read()
-			result = int(data)
-			if (result > 0):
-				self.id = result
-				print self.name + " has been updated."
+		if (self.loaded == 1):
+			conn = connection.create()
+			params = urllib.urlencode(self.__dict__)
+			headers = {"Content-Type":"application/x-www-form-urlencoded", "Accept":"text/json"}
+			conn.request("POST", "/projects/update", params, headers)
+			res = conn.getresponse()
+			if (res.status == 200 and res.reason == "OK"):
+				data = res.read()
+				result = int(data)
+				if (result > 0):
+					self.id = result
+					print self.name + " has been updated."
+				else:
+					print "Error updating."
 			else:
-				print "Error updating."
+				print "Error in the server."
 		else:
-			print "Error in the server."
+			print "Please load " + self.name + " before updating."
 
 	def save(self):
 		"""

@@ -27,7 +27,7 @@ class Account:
 					conn.close()
 					raise ValueError("'" + email + "'"  + " is not a valid email address.")
 
-	def getEmptyProjects(self):
+	def getProjects(self):
 		"""
 			Gets the projects associated with this account (Projects need to be loaded)
 		"""
@@ -46,7 +46,7 @@ class Account:
 				emptyProjects.append(proj)
 				outputString += "(" + repr(count) + ") " + x['name'] + "  "
 				count = count + 1
-		print outputString + "\n"
+		print outputString
 		return emptyProjects
 
 	def logout(self):
