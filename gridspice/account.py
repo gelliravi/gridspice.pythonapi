@@ -22,7 +22,6 @@ class Account:
 					self.email = email.strip()
 					print "Welcome " + email + "!"
 				else:   
-					conn.close()
 					raise ValueError("'" + email + "'"  + " is not a valid email address.")
 
 	def getProjects(self):
@@ -38,7 +37,7 @@ class Account:
 			data = r.text
 			jsonList = json.loads(data)
 			for x in jsonList:
-				proj = project.Project(x['name'], self, empty = 1)
+				proj = project.Project(x['name'].encode('ascii'), self, empty = 1)
 				proj.id = int(x['id'])
 				emptyProjects.append(proj)
 				outputString += "(" + repr(count) + ") " + x['name'] + "  "

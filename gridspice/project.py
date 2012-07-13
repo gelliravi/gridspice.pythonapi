@@ -46,15 +46,14 @@ class Project:
 				data = r.text
 				jsonList = json.loads(data)
 				for x in jsonList:
-					mod = model.Model(x['name'], self, empty = 1)
+					mod = model.Model(x['name'].encode('ascii'), self, empty = 1)
 					mod.id = int(x['id'])
 					emptyModels.append(mod)
 					outputString += "(" + repr(count) + ") " + mod.name + "  "
 					count = count + 1
 		else:
 			print "This project has not yet been stored."
-			
-		print outPutString
+		print outputString
 		return emptyModels
 		
 

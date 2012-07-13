@@ -6,20 +6,22 @@ class Model:
     """
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
-    def __init__(self, name, project, empty = 0):
-	self.id = None
-    self.name = name
-    self.loaded = 0
-    #TODO print error if project has no id
-    
-    if (empty == 0):
-    	self.projectId = project.id	
-        self.mapType = mapType
-        self.counter = 0
-        self.climate = config.DEFAULT_CLIMATE
-        self.schematicType = schematicType
-        self.loaded = 1
-    
+    def __init__(self, name, project, schematicType = config.DEFAULT_SCHEMATIC_TYPE, mapType = config.DEFAULT_MAP_TYPE, empty = 0):
+        if (project.id != None and project.id > 0):
+            self.id = None
+            self.name = name
+            self.projectId = project.id    
+            self.loaded = 0
+            if (empty == 0):
+                self.counter = 0
+                self.climate = config.DEFAULT_CLIMATE
+                self.schematicType = schematicType
+                self.mapType = mapType
+                self.layoutType = config.DEFAULT_LAYOUT_TYPE
+                self.loaded = 1
+        else:
+            raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
+
 
     def load(self):
 	"""
