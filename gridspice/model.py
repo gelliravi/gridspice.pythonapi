@@ -5,9 +5,16 @@ class Model:
     """
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
-    def __init__(self, name, project):
-	self.name = name;
-	self.projectId = project.id	
+    def __init__(self, name, schematicType, project, empty = 0):
+	self.id = None
+    self.name = name
+    if (empty == 0):
+    	self.projectId = project.id	
+        self.mapType = mapType
+        self.counter = 0
+        self.climate = config.DEFAULT_CLIMATE
+        self.schematicType = schematicType
+    
 
     def load(self):
 	"""

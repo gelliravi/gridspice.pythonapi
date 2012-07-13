@@ -3,9 +3,9 @@
 
 import account
 import config
-import connection
 import json
 import urllib
+import requests
 
 class Project:
 
@@ -20,18 +20,18 @@ class Project:
 			raise ValueError("Invalid account inputted.")
 		self.accountId = account.id
 		self.emailAddress = account.email
+		self.loaded = 0
 		if (empty == 0):
 			self.startDateTime = config.DEFAULT_DATE
 			self.endDateTime = config.DEFAULT_DATE
 			self.transmissionId = "-1"
-			self.climate = config.DEFAULT_CLIMATE
 			self.timeZone = config.DEFAULT_TIMEZONE	
+			self.loaded = 1
 			self.modules = { }
 			for x in config.DEFAULT_MODULE_NAMES:
 				self.modules[x] = ""
 
-		
-	def getEmptyModels(self):
+	def getModels(self):
 		"""	
 		Gets the models associated with this project (Models need to be loaded.)
 		"""
@@ -40,52 +40,84 @@ class Project:
 		"""
 		fills in the other information to the project object
 		"""
-		conn = connection.create()
-		conn.request("GET", "/projects.json" + "?" + "id=" + repr(self.id))
-		res = conn.getresponse()
+		payload = {'id':self.id}
+		r = requests.get(config.URL + "projects/ids", params = payload)
 		emptyProjects = []
-		if (res.status == 200 and res.reason == "OK"):
-			data = res.read()
+		if (r.status_code == requests.codes.ok):
+			data = r.text
 			jsonProj = json.loads(data)
-			self.email = jsonProj['email']
-			self.timeZone = jsonProj['timeZone']
-			self.startDateTime = jsonProj['startDateTime']
-			self.endDateTime = jsonProj['endDateTime']
+			self.loaded = 1
+			self.email = jsonProj['email'].encode('ascii')
+			self.timeZone = jsonProj['timeZone'].encode('ascii')
+			self.startDateTime = jsonProj['startDateTime'].encode('ascii')
+			self.endDateTime = jsonProj['endDateTime'].encode('ascii')
+			self.modules = {}
+			tempModules = jsonProj['modules'];
+			for key in tempModules:
+				self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
 			print "Project " + self.name + " has been loaded."
 
 	def _store(self):
-		conn = connection.create()
-		params = urllib.urlencode(self.__dict__)
-		headers = {"Content-Type":"application/x-www-form-urlencoded", "Accept":"text/json"}
-		conn.request("POST", "/projects.json", params, headers)
-		res = conn.getresponse()
-		if (res.status == 200 and res.reason == "OK"):
-			data = res.read()
+		payload = urllib.urlencode(self.__dict__)
+		r = requests.post(config.URL + "projects/create", data=payload)
+		if (r.status_code == requests.codes.ok):
+			data = r.text
 			result = int(data)
-			if (result == 1):
-				print self.name + " has been stored."
+			if (result > 0):
+				self.id = result
+				print self.name + " has been stored in the database."
 			else:
 				print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
 		else:
 			print "Error in the server."	
+			
 	def _update(self):
-		
-		print self.name + " has been updated."
-
+		payload = urllib.urlencode(self.__dict__)
+		r = requests.post(config.URL + "projects/update", data=payload)
+		if (r.status_code == requests.codes.ok):
+			data = r.text
+			result = int(data)
+			if (result > 0):
+				self.id = result
+				print self.name + " has been updated."
+			else:
+				print "Error updating."
+		else:
+			print "Error in the server."
+			
 	def save(self):
 		"""
 			saves this project
 		"""
-		if (self.id is None):
-			self._store()
+		if (self.loaded == 1):
+			if (self.id is None):
+				self._store()
+			else:
+				self._update()
 		else:
-			self._update()
+			print "Please load " + self.name + " before updating."
 
 	def delete(self):
 		"""
-		deletes this project
+			deletes this project
 		"""
-
+		if (self.id != None):
+			headers = {'Content-Length':'0'}
+			r = requests.post(config.URL + "projects/destroy/" + repr(self.id), headers = headers)
+			print r.text
+			if (r.status_code == requests.codes.ok):
+				data = r.text
+				result = int(data)
+				if (result == 1):
+					self.id = None
+					print self.name + " has been deleted from the database."
+				else:
+					print "Error deleting."
+			else:
+				print "Error in the server."
+		else:
+			print self.name + "has not yet been stored in the database"
+			
 	def copy(self, account):
 		"""
 		returns a copy of this project
