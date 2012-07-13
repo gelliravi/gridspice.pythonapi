@@ -53,6 +53,7 @@ class Project:
 					count = count + 1
 		else:
 			print "This project has not yet been stored."
+		
 		print outputString
 		return emptyModels
 		
@@ -61,22 +62,25 @@ class Project:
 		"""
 		fills in the other information to the project object
 		"""
-		payload = {'id':self.id}
-		r = requests.get(config.URL + "projects/ids", params = payload)
-		if (r.status_code == requests.codes.ok):
-			data = r.text
-			jsonProj = json.loads(data)
-			self.loaded = 1
-			self.email = jsonProj['email'].encode('ascii')
-			self.timeZone = jsonProj['timeZone'].encode('ascii')
-			self.startDateTime = jsonProj['startDateTime'].encode('ascii')
-			self.endDateTime = jsonProj['endDateTime'].encode('ascii')
-			self.modules = {}
-			tempModules = jsonProj['modules'];
-			for key in tempModules:
-				self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
-			print "Project " + self.name + " has been loaded."
-
+		if (self.id != None):
+			payload = {'id':self.id}
+			r = requests.get(config.URL + "projects/ids", params = payload)
+			if (r.status_code == requests.codes.ok):
+				data = r.text
+				jsonProj = json.loads(data)
+				self.loaded = 1
+				self.email = jsonProj['email'].encode('ascii')
+				self.timeZone = jsonProj['timeZone'].encode('ascii')
+				self.startDateTime = jsonProj['startDateTime'].encode('ascii')
+				self.endDateTime = jsonProj['endDateTime'].encode('ascii')
+				self.modules = {}
+				tempModules = jsonProj['modules'];
+				for key in tempModules:
+					self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
+				print "Project " + self.name + " has been loaded."
+		else:
+			print self.name + " has not yet been stored in the database."
+	
 	def _store(self):
 		payload = urllib.urlencode(self.__dict__)
 		r = requests.post(config.URL + "projects/create", data=payload)
@@ -124,7 +128,6 @@ class Project:
 		if (self.id != None):
 			headers = {'Content-Length':'0'}
 			r = requests.post(config.URL + "projects/destroy/" + repr(self.id), headers = headers)
-			print r.text
 			if (r.status_code == requests.codes.ok):
 				data = r.text
 				result = int(data)

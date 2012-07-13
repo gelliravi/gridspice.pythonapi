@@ -1,6 +1,9 @@
 # Intro To Python:  Modules
 # book.py
 import config
+import requests
+import urllib
+import json
 
 class Model:
     """
@@ -17,7 +20,6 @@ class Model:
                 self.climate = config.DEFAULT_CLIMATE
                 self.schematicType = schematicType
                 self.mapType = mapType
-                self.layoutType = config.DEFAULT_LAYOUT_TYPE
                 self.loaded = 1
         else:
             raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
@@ -27,16 +29,82 @@ class Model:
 	"""
 	   fills in the other information to the model object
 	"""
-	
+        if (self.id != None):
+            payload = {'id':self.id}
+            r = requests.get(config.URL + "models/ids", params = payload)
+            if (r.status_code == requests.codes.ok):
+                data = r.text
+                jsonModel = json.loads(data);
+                self.counter = int(jsonModel['counter'])
+                self.climate = jsonModel['climate'].encode('ascii')
+                self.schematicType = jsonModel['schematicType'].encode('ascii')
+                self.mapType = jsonModel['mapType'].encode('ascii')
+                self.loaded = 1
+                print self.name + " has been loaded."
+        else:
+            print self.name + " has not yet been stored in the database."
+            
+            
+    def _store(self):
+        payload = urllib.urlencode(self.__dict__)
+        r = requests.post(config.URL + "models/create", data=payload)
+        if (r.status_code == requests.codes.ok):
+            data = r.text
+            result = int(data)
+            if (result > 0):
+                self.id = result
+                print self.name + " has been stored in the database."
+            else:
+                print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
+        else:
+            print "Error in the server."    
+            
+    def _update(self):
+        payload = urllib.urlencode(self.__dict__)
+        r = requests.post(config.URL + "models/update", data=payload)
+        if (r.status_code == requests.codes.ok):
+            data = r.text
+            result = int(data)
+            if (result > 0):
+                self.id = result
+                print self.name + " has been updated."
+            else:
+                print "Error updating."
+        else:
+            print "Error in the server."
+            
     def save(self):
 	"""
 	   saves this model
 	"""
+        if (self.loaded == 1):
+            if (self.id is None):
+                self._store()
+            else:
+                self._update()
+        else:
+            print "Please load " + self.name + " before updating."
 
     def	delete(self):
 	"""
 	   deletes this model
 	"""
+        if (self.id != None):
+            headers = {'Content-Length':'0'}
+            r = requests.post(config.URL + "models/destroy/" + repr(self.id), headers = headers)
+            if (r.status_code == requests.codes.ok):
+                data = r.text
+                result = int(data)
+                if (result == 1):
+                    self.id = None
+                    print self.name + " has been deleted from the database."
+                else:
+                    print "Error deleting."
+            else:
+                print "Error in the server."
+        else:
+            print self.name + "has not yet been stored in the database"
+
 
     def	add (self, element):
 	"""
