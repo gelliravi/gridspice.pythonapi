@@ -5,11 +5,26 @@ import requests
 import urllib
 import json
 
+class SchematicType:
+    """
+        SchematicType contains three constants which represent the model type: UNKNOWN, TRANSMISSION, DISTRIBUTION
+    """
+    UNKNOWN = "UNKNOWN" 
+    TRANSMISSION = "TRANSMISSION"
+    DISTRIBUTION = "DISTRIBUTION"
+    
+class MapType:
+    """
+        MapType contains two constants which represent the map type: BLANK, POLITICAL
+    """
+    BLANK = "BLANK"
+    POLITICAL = "POLITICAL"
+
 class Model:
     """
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
-    def __init__(self, name, project, schematicType = config.DEFAULT_SCHEMATIC_TYPE, mapType = config.DEFAULT_MAP_TYPE, empty = 0):
+    def __init__(self, name, project, schematicType = SchematicType.DISTRIBUTION, mapType = MapType.POLITICAL, empty = 0):
         if (project.id != None and project.id > 0):
             self.id = None
             self.name = name
@@ -119,5 +134,4 @@ class Model:
     def	copy(self, project):
 	"""
 	   Returns a copy of this model
-    	"""
-
+    """
