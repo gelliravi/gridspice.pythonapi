@@ -2,9 +2,9 @@
 # book.py
 
 import config
-import connection
 import project
 import json
+import requests
 
 class Account:
 	"""
@@ -12,12 +12,10 @@ class Account:
 	"""
 	def __init__(self, email = "null"):
 		if (email != "null") :
-			conn = connection.create()
-			conn.request("GET", "/users/login.json"
-							+ "?" + "email=" + email)
-			res = conn.getresponse()
-			if (res.status == 200 and res.reason == "OK"):
-				data = res.read()
+			payload = {'email':email}
+			r = requests.get(config.URL + "users/login.json", params = payload)
+			if (r.status_code == requests.codes.ok):
+				data = r.text
 				id = int(data)
 				if (id > 0):
 					self.id = id
@@ -31,14 +29,13 @@ class Account:
 		"""
 			Gets the projects associated with this account (Projects need to be loaded)
 		"""
-		conn = connection.create()
-		conn.request("GET", "/multipleprojects.json" + "?" + "email=" + self.email)
-		res = conn.getresponse()
+		payload = {'email':self.email}
+		r = requests.get(config.URL + "multipleprojects.json", params = payload)
 		emptyProjects = []
 		outputString = ""
 		count = 0
-		if (res.status == 200 and res.reason == "OK"):
-			data = res.read()
+		if (r.status_code == requests.codes.ok):
+			data = r.text
 			jsonList = json.loads(data)
 			for x in jsonList:
 				proj = project.Project(x['name'], self, empty = 1)
