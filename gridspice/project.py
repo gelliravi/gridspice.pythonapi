@@ -6,6 +6,7 @@ import config
 import json
 import urllib
 import requests
+import model
 
 class Project:
 
@@ -35,6 +36,27 @@ class Project:
 		"""	
 		Gets the models associated with this project (Models need to be loaded.)
 		"""
+		emptyModels = []
+		outputString = ""
+		if (self.id != None):
+			payload = {'id':self.id}
+			r = requests.get(config.URL + "multiplemodels.json", params = payload)
+			count = 0
+			if (r.status_code == requests.codes.ok):
+				data = r.text
+				jsonList = json.loads(data)
+				for x in jsonList:
+					mod = model.Model(x['name'], self, empty = 1)
+					mod.id = int(x['id'])
+					emptyModels.append(mod)
+					outputString += "(" + repr(count) + ") " + mod.name + "  "
+					count = count + 1
+		else:
+			print "This project has not yet been stored."
+			
+		print outPutString
+		return emptyModels
+		
 
 	def load(self):
 		"""
@@ -42,7 +64,6 @@ class Project:
 		"""
 		payload = {'id':self.id}
 		r = requests.get(config.URL + "projects/ids", params = payload)
-		emptyProjects = []
 		if (r.status_code == requests.codes.ok):
 			data = r.text
 			jsonProj = json.loads(data)
