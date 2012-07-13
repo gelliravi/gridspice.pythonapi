@@ -9,7 +9,7 @@ GridSpice Scripting Interface
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
 
    GettingStarted.rst
