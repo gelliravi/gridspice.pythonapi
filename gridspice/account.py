@@ -11,19 +11,19 @@ class Account:
 	"""
 		The GridSpice account object contains the credentials for communication with the model server
 	"""
-	def __init__(self, apiKEY): 
-			payload = {'apiKEY':apiKEY}
+	def __init__(self, APIKey): 
+			payload = {'APIKey':APIKey}
 			r = requests.get(config.URL + "users/login.json", params = payload)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
-				if (data != "-1"):
+				if (data.strip() != "-1"):
 					accObject = json.loads(data);
-					self.id = accObject['id']
+					self.id = int(accObject['id'])
 					self.email = accObject['email']
-					self.APIKey = apiKey
-					print "Welcome " + email + "!"
+					self.APIKey = APIKey
+					print "Welcome " + self.email + "!"
 				else:   
-					raise ValueError("'" + email + "'"  + " is not a valid email address.")
+					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 
 	def getProjects(self):
 		"""
