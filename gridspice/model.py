@@ -30,6 +30,7 @@ class Model:
             self.name = name
             self.projectId = project.id    
             self.loaded = 0
+            self.APIKey = project.APIKey
             if (empty == 0):
                 self.counter = 0
                 self.climate = config.DEFAULT_CLIMATE
@@ -45,7 +46,7 @@ class Model:
 	   fills in the other information to the model object
 	"""
         if (self.id != None):
-            payload = {'id':self.id}
+            payload = {'id':self.id, 'APIKey':self.APIKey}
             r = requests.get(config.URL + "models/ids", params = payload)
             if (r.status_code == requests.codes.ok):
                 data = r.text
@@ -105,8 +106,8 @@ class Model:
 	   deletes this model
 	"""
         if (self.id != None):
-            headers = {'Content-Length':'0'}
-            r = requests.post(config.URL + "models/destroy/" + repr(self.id), headers = headers)
+            payload = {'APIKey':self.APIKey}
+            r = requests.post(config.URL + "models/destroy/" + repr(self.id), data=payload)
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 result = int(data)

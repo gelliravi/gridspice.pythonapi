@@ -20,6 +20,7 @@ class Project:
 		if (account.__class__.__name__ != 'Account'):
 			raise ValueError("Invalid account inputted.")
 		self.accountId = account.id
+		self.APIKey = account.APIKey
 		self.emailAddress = account.email
 		self.loaded = 0
 		if (empty == 0):
@@ -39,7 +40,7 @@ class Project:
 		emptyModels = []
 		outputString = ""
 		if (self.id != None):
-			payload = {'id':self.id}
+			payload = {'id':self.id, 'APIKey':self.APIKey }
 			r = requests.get(config.URL + "multiplemodels.json", params = payload)
 			count = 0
 			if (r.status_code == requests.codes.ok):
@@ -63,7 +64,7 @@ class Project:
 		fills in the other information to the project object
 		"""
 		if (self.id != None):
-			payload = {'id':self.id}
+			payload = {'id':self.id, 'APIKey':self.APIKey}
 			r = requests.get(config.URL + "projects/ids", params = payload)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
@@ -126,8 +127,8 @@ class Project:
 			deletes this project
 		"""
 		if (self.id != None):
-			headers = {'Content-Length':'0'}
-			r = requests.post(config.URL + "projects/destroy/" + repr(self.id), headers = headers)
+			payload = {'APIKey': self.APIKey}
+			r = requests.post(config.URL + "projects/destroy/" + repr(self.id), data=payload)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
 				result = int(data)

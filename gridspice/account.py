@@ -5,21 +5,22 @@ import config
 import project
 import json
 import requests
+import webbrowser
 
 class Account:
 	"""
 		The GridSpice account object contains the credentials for communication with the model server
 	"""
-	def __init__(self, email = "null"):
-		if (email != "null") :
-			payload = {'email':email}
+	def __init__(self, apiKEY): 
+			payload = {'apiKEY':apiKEY}
 			r = requests.get(config.URL + "users/login.json", params = payload)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
-				id = int(data)
-				if (id > 0):
-					self.id = id
-					self.email = email.strip()
+				if (data != "-1"):
+					accObject = json.loads(data);
+					self.id = accObject['id']
+					self.email = accObject['email']
+					self.APIKey = apiKey
 					print "Welcome " + email + "!"
 				else:   
 					raise ValueError("'" + email + "'"  + " is not a valid email address.")
@@ -28,7 +29,7 @@ class Account:
 		"""
 			Gets the projects associated with this account (Projects need to be loaded)
 		"""
-		payload = {'email':self.email}
+		payload = {'email':self.email, 'APIKey':self.APIKey}
 		r = requests.get(config.URL + "multipleprojects.json", params = payload)
 		emptyProjects = []
 		outputString = ""
