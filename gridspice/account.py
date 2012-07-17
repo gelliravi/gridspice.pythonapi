@@ -36,13 +36,16 @@ class Account:
 		count = 0
 		if (r.status_code == requests.codes.ok):
 			data = r.text
-			jsonList = json.loads(data)
-			for x in jsonList:
-				proj = project.Project(x['name'].encode('ascii'), self, empty = 1)
-				proj.id = int(x['id'])
-				emptyProjects.append(proj)
-				outputString += "(" + repr(count) + ") " + x['name'] + "  "
-				count = count + 1
+			if (data != config.INVALID_API_KEY):
+				jsonList = json.loads(data)
+				for x in jsonList:
+					proj = project.Project(x['name'].encode('ascii'), self, empty = 1)
+					proj.id = int(x['id'])
+					emptyProjects.append(proj)
+					outputString += "(" + repr(count) + ") " + x['name'] + "  "
+					count = count + 1
+			else:
+				outputString = config.INVALID_API_KEY
 		print outputString
 		return emptyProjects
 

@@ -45,13 +45,16 @@ class Project:
 			count = 0
 			if (r.status_code == requests.codes.ok):
 				data = r.text
-				jsonList = json.loads(data)
-				for x in jsonList:
-					mod = model.Model(x['name'].encode('ascii'), self, empty = 1)
-					mod.id = int(x['id'])
-					emptyModels.append(mod)
-					outputString += "(" + repr(count) + ") " + mod.name + "  "
-					count = count + 1
+				if (data != config.INVALID_API_KEY):
+					jsonList = json.loads(data)
+					for x in jsonList:
+						mod = model.Model(x['name'].encode('ascii'), self, empty = 1)
+						mod.id = int(x['id'])
+						emptyModels.append(mod)
+						outputString += "(" + repr(count) + ") " + mod.name + "  "
+						count = count + 1
+				else:
+					print config.INVALID_API_KEY
 		else:
 			print "This project has not yet been stored."
 		
@@ -68,17 +71,20 @@ class Project:
 			r = requests.get(config.URL + "projects/ids", params = payload)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
-				jsonProj = json.loads(data)
-				self.loaded = 1
-				self.email = jsonProj['email'].encode('ascii')
-				self.timeZone = jsonProj['timeZone'].encode('ascii')
-				self.startDateTime = jsonProj['startDateTime'].encode('ascii')
-				self.endDateTime = jsonProj['endDateTime'].encode('ascii')
-				self.modules = {}
-				tempModules = jsonProj['modules'];
-				for key in tempModules:
-					self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
-				print "Project " + self.name + " has been loaded."
+				if (data != config.INVALID_API_KEY):
+					jsonProj = json.loads(data)
+					self.loaded = 1
+					self.email = jsonProj['email'].encode('ascii')
+					self.timeZone = jsonProj['timeZone'].encode('ascii')
+					self.startDateTime = jsonProj['startDateTime'].encode('ascii')
+					self.endDateTime = jsonProj['endDateTime'].encode('ascii')
+					self.modules = {}
+					tempModules = jsonProj['modules'];
+					for key in tempModules:
+						self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
+					print "Project " + self.name + " has been loaded."
+				else:
+					print config.INVALID_API_KEY
 		else:
 			print self.name + " has not yet been stored in the database."
 	
@@ -87,12 +93,15 @@ class Project:
 		r = requests.post(config.URL + "projects/create", data=payload)
 		if (r.status_code == requests.codes.ok):
 			data = r.text
-			result = int(data)
-			if (result > 0):
-				self.id = result
-				print self.name + " has been stored in the database."
+			if (data != config.INVALID_API_KEY):
+				result = int(data)
+				if (result > 0):
+					self.id = result
+					print self.name + " has been stored in the database."
+				else:
+					print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
 			else:
-				print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
+				print config.INVALID_API_KEY
 		else:
 			print "Error in the server."	
 			
@@ -101,12 +110,15 @@ class Project:
 		r = requests.post(config.URL + "projects/update", data=payload)
 		if (r.status_code == requests.codes.ok):
 			data = r.text
-			result = int(data)
-			if (result > 0):
-				self.id = result
-				print self.name + " has been updated."
+			if (data != config.INVALID_API_KEY):
+				result = int(data)
+				if (result > 0):
+					self.id = result
+					print self.name + " has been updated."
+				else:
+					print "Error updating."
 			else:
-				print "Error updating."
+				print config.INVALID_API_KEY
 		else:
 			print "Error in the server."
 			
@@ -131,12 +143,15 @@ class Project:
 			r = requests.post(config.URL + "projects/destroy/" + repr(self.id), data=payload)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
-				result = int(data)
-				if (result == 1):
-					self.id = None
-					print self.name + " has been deleted from the database."
+				if (data != config.INVALID_API_KEY):
+					result = int(data)
+					if (result == 1):
+						self.id = None
+						print self.name + " has been deleted from the database."
+					else:
+						print "Error deleting."
 				else:
-					print "Error deleting."
+					print config.INVALID_API_KEY
 			else:
 				print "Error in the server."
 		else:

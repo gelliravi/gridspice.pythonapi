@@ -50,13 +50,16 @@ class Model:
             r = requests.get(config.URL + "models/ids", params = payload)
             if (r.status_code == requests.codes.ok):
                 data = r.text
-                jsonModel = json.loads(data);
-                self.counter = int(jsonModel['counter'])
-                self.climate = jsonModel['climate'].encode('ascii')
-                self.schematicType = jsonModel['schematicType'].encode('ascii')
-                self.mapType = jsonModel['mapType'].encode('ascii')
-                self.loaded = 1
-                print self.name + " has been loaded."
+                if (data != config.INVALID_API_KEY):
+                    jsonModel = json.loads(data);
+                    self.counter = int(jsonModel['counter'])
+                    self.climate = jsonModel['climate'].encode('ascii')
+                    self.schematicType = jsonModel['schematicType'].encode('ascii')
+                    self.mapType = jsonModel['mapType'].encode('ascii')
+                    self.loaded = 1
+                    print self.name + " has been loaded."
+                else:
+                    print config.INVALID_API_KEY
         else:
             print self.name + " has not yet been stored in the database."
             
@@ -66,12 +69,15 @@ class Model:
         r = requests.post(config.URL + "models/create", data=payload)
         if (r.status_code == requests.codes.ok):
             data = r.text
-            result = int(data)
-            if (result > 0):
-                self.id = result
-                print self.name + " has been stored in the database."
+            if (data != config.INVALID_API_KEY):
+                result = int(data)
+                if (result > 0):
+                    self.id = result
+                    print self.name + " has been stored in the database."
+                else:
+                    print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
             else:
-                print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
+                print config.INVALID_API_KEY
         else:
             print "Error in the server."    
             
@@ -80,12 +86,15 @@ class Model:
         r = requests.post(config.URL + "models/update", data=payload)
         if (r.status_code == requests.codes.ok):
             data = r.text
-            result = int(data)
-            if (result > 0):
-                self.id = result
-                print self.name + " has been updated."
+            if (data != config.INVALID_API_KEY):
+                result = int(data)
+                if (result > 0):
+                    self.id = result
+                    print self.name + " has been updated."
+                else:
+                    print "Error updating."
             else:
-                print "Error updating."
+                print config.INVALID_API_KEY
         else:
             print "Error in the server."
             
@@ -110,12 +119,15 @@ class Model:
             r = requests.post(config.URL + "models/destroy/" + repr(self.id), data=payload)
             if (r.status_code == requests.codes.ok):
                 data = r.text
-                result = int(data)
-                if (result == 1):
-                    self.id = None
-                    print self.name + " has been deleted from the database."
+                if (data != config.INVALID_API_KEY):
+                    result = int(data)
+                    if (result == 1):
+                        self.id = None
+                        print self.name + " has been deleted from the database."
+                    else:
+                        print "Error deleting."
                 else:
-                    print "Error deleting."
+                    print config.INVALID_API_KEY
             else:
                 print "Error in the server."
         else:
