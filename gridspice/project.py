@@ -40,8 +40,9 @@ class Project:
 		emptyModels = []
 		outputString = ""
 		if (self.id != None):
-			payload = {'id':self.id, 'APIKey':self.APIKey }
-			r = requests.get(config.URL + "multiplemodels.json", params = payload)
+			payload = {'id':self.id}
+			headers = {'APIKey':self.APIKey}
+			r = requests.get(config.URL + "multiplemodels.json", params = payload, headers = headers)
 			count = 0
 			if (r.status_code == requests.codes.ok):
 				data = r.text
@@ -67,10 +68,12 @@ class Project:
 		fills in the other information to the project object
 		"""
 		if (self.id != None):
-			payload = {'id':self.id, 'APIKey':self.APIKey}
-			r = requests.get(config.URL + "projects/ids", params = payload)
+			payload = {'id':self.id}
+			headers = {'APIKey':self.APIKey}
+			r = requests.get(config.URL + "projects/ids", params = payload, headers = headers)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
+				print data + "\n"
 				if (data != config.INVALID_API_KEY):
 					jsonProj = json.loads(data)
 					self.loaded = 1
@@ -90,7 +93,8 @@ class Project:
 	
 	def _store(self):
 		payload = urllib.urlencode(self.__dict__)
-		r = requests.post(config.URL + "projects/create", data=payload)
+		headers = {'APIKey':self.APIKey}
+		r = requests.post(config.URL + "projects/create", data=payload, headers = headers)
 		if (r.status_code == requests.codes.ok):
 			data = r.text
 			if (data != config.INVALID_API_KEY):
@@ -107,7 +111,8 @@ class Project:
 			
 	def _update(self):
 		payload = urllib.urlencode(self.__dict__)
-		r = requests.post(config.URL + "projects/update", data=payload)
+		headers = {'APIKey': self.APIKey}
+		r = requests.post(config.URL + "projects/update", data=payload, headers = headers)
 		if (r.status_code == requests.codes.ok):
 			data = r.text
 			if (data != config.INVALID_API_KEY):
@@ -139,8 +144,8 @@ class Project:
 			deletes this project
 		"""
 		if (self.id != None):
-			payload = {'APIKey': self.APIKey}
-			r = requests.post(config.URL + "projects/destroy/" + repr(self.id), data=payload)
+			headers = {'APIKey': self.APIKey, 'Content-Length':'0'}
+			r = requests.post(config.URL + "projects/destroy/" + repr(self.id), headers = headers)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
 				if (data != config.INVALID_API_KEY):

@@ -46,8 +46,9 @@ class Model:
 	   fills in the other information to the model object
 	"""
         if (self.id != None):
-            payload = {'id':self.id, 'APIKey':self.APIKey}
-            r = requests.get(config.URL + "models/ids", params = payload)
+            payload = {'id':self.id}
+            headers = {'APIKey':self.APIKey}
+            r = requests.get(config.URL + "models/ids", params = payload, headers = headers)
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
@@ -66,7 +67,8 @@ class Model:
             
     def _store(self):
         payload = urllib.urlencode(self.__dict__)
-        r = requests.post(config.URL + "models/create", data=payload)
+        headers = {'APIKey':self.APIKey}
+        r = requests.post(config.URL + "models/create", data=payload, headers = headers)
         if (r.status_code == requests.codes.ok):
             data = r.text
             if (data != config.INVALID_API_KEY):
@@ -83,7 +85,8 @@ class Model:
             
     def _update(self):
         payload = urllib.urlencode(self.__dict__)
-        r = requests.post(config.URL + "models/update", data=payload)
+        headers = {'APIKey':self.APIKey}
+        r = requests.post(config.URL + "models/update", data=payload, headers = headers)
         if (r.status_code == requests.codes.ok):
             data = r.text
             if (data != config.INVALID_API_KEY):
@@ -115,8 +118,8 @@ class Model:
 	   deletes this model
 	"""
         if (self.id != None):
-            payload = {'APIKey':self.APIKey}
-            r = requests.post(config.URL + "models/destroy/" + repr(self.id), data=payload)
+            headers = {'APIKey':self.APIKey, 'Content-Length':'0'}
+            r = requests.post(config.URL + "models/destroy/" + repr(self.id), headers = headers)
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
