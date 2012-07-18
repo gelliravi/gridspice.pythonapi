@@ -73,7 +73,6 @@ class Project:
 			r = requests.get(config.URL + "projects/ids", params = payload, headers = headers)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
-				print data + "\n"
 				if (data != config.INVALID_API_KEY):
 					jsonProj = json.loads(data)
 					self.loaded = 1
