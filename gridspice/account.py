@@ -16,7 +16,7 @@ class Account:
 			r = requests.get(config.URL + "users/login.json", headers = headers)
 			if (r.status_code == requests.codes.ok):
 				data = r.text
-				if (data.strip() != "-1"):
+				if (data.strip() != config.INVALID_API_KEY):
 					accObject = json.loads(data);
 					self.id = int(accObject['id'])
 					self.email = accObject['email']

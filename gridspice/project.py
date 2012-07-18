@@ -92,7 +92,9 @@ class Project:
 			print self.name + " has not yet been stored in the database."
 	
 	def _store(self):
-		payload = urllib.urlencode(self.__dict__)
+		dictCopy = self.__dict__.copy()
+		del dictCopy['APIKey']
+		payload = urllib.urlencode(dictCopy)
 		headers = {'APIKey':self.APIKey}
 		r = requests.post(config.URL + "projects/create", data=payload, headers = headers)
 		if (r.status_code == requests.codes.ok):
@@ -110,7 +112,9 @@ class Project:
 			print "Error in the server."	
 			
 	def _update(self):
-		payload = urllib.urlencode(self.__dict__)
+		dictCopy = self.__dict__.copy()
+		del dictCopy['APIKey']
+		payload = urllib.urlencode(dictCopy)
 		headers = {'APIKey': self.APIKey}
 		r = requests.post(config.URL + "projects/update", data=payload, headers = headers)
 		if (r.status_code == requests.codes.ok):

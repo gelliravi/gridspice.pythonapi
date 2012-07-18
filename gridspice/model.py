@@ -66,7 +66,9 @@ class Model:
             
             
     def _store(self):
-        payload = urllib.urlencode(self.__dict__)
+        dictCopy = self.__dict__.copy()
+        del dictCopy['APIKey']
+        payload = urllib.urlencode(dictCopy)
         headers = {'APIKey':self.APIKey}
         r = requests.post(config.URL + "models/create", data=payload, headers = headers)
         if (r.status_code == requests.codes.ok):
@@ -84,7 +86,9 @@ class Model:
             print "Error in the server."    
             
     def _update(self):
-        payload = urllib.urlencode(self.__dict__)
+        dictCopy = self.__dict__.copy()
+        del dictCopy['APIKey']
+        payload = urllib.urlencode(dictCopy)
         headers = {'APIKey':self.APIKey}
         r = requests.post(config.URL + "models/update", data=payload, headers = headers)
         if (r.status_code == requests.codes.ok):
