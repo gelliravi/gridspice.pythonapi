@@ -2,9 +2,8 @@ import account
 import project
 import simulation
 import model
-import connection
 import converter
 import config
 import httplib
 import urllib
-import element
+import elementbase

@@ -27,7 +27,7 @@ class Project:
 			self.startDateTime = config.DEFAULT_DATE
 			self.endDateTime = config.DEFAULT_DATE
 			self.transmissionId = "-1"
-			self.timeZone = config.DEFAULT_TIMEZONE	
+			#self.timeZone = config.DEFAULT_TIMEZONE	
 			self.loaded = 1
 			self.modules = { }
 			for x in config.DEFAULT_MODULE_NAMES:
@@ -77,7 +77,7 @@ class Project:
 					jsonProj = json.loads(data)
 					self.loaded = 1
 					self.email = jsonProj['email'].encode('ascii')
-					self.timeZone = jsonProj['timeZone'].encode('ascii')
+					#self.timeZone = jsonProj['timeZone'].encode('ascii')
 					self.startDateTime = jsonProj['startDateTime'].encode('ascii')
 					self.endDateTime = jsonProj['endDateTime'].encode('ascii')
 					self.modules = {}
