@@ -47,7 +47,7 @@ class Account:
 					outputString += "(" + repr(count) + ") " + x['name'] + "  "
 					count = count + 1
 			else:
-				outputString = config.INVALID_API_KEY
+				raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 		print outputString
 		return emptyProjects
 

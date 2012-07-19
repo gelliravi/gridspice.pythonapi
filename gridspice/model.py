@@ -60,7 +60,7 @@ class Model:
                     self.loaded = 1
                     print self.name + " has been loaded."
                 else:
-                    print config.INVALID_API_KEY
+                    raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
         else:
             print self.name + " has not yet been stored in the database."
             
@@ -81,7 +81,7 @@ class Model:
                 else:
                     print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
             else:
-                print config.INVALID_API_KEY
+                raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
         else:
             print "Error in the server."    
             
@@ -101,7 +101,7 @@ class Model:
                 else:
                     print "Error updating."
             else:
-                print config.INVALID_API_KEY
+                raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
         else:
             print "Error in the server."
             
@@ -134,7 +134,7 @@ class Model:
                     else:
                         print "Error deleting."
                 else:
-                    print config.INVALID_API_KEY
+                    raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
             else:
                 print "Error in the server."
         else:

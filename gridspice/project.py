@@ -55,7 +55,7 @@ class Project:
 						outputString += "(" + repr(count) + ") " + mod.name + "  "
 						count = count + 1
 				else:
-					print config.INVALID_API_KEY
+					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 		else:
 			print "This project has not yet been stored."
 		
@@ -86,7 +86,7 @@ class Project:
 						self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
 					print "Project " + self.name + " has been loaded."
 				else:
-					print config.INVALID_API_KEY
+					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 		else:
 			print self.name + " has not yet been stored in the database."
 	
@@ -106,7 +106,7 @@ class Project:
 				else:
 					print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
 			else:
-				print config.INVALID_API_KEY
+				raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 		else:
 			print "Error in the server."	
 			
@@ -126,7 +126,7 @@ class Project:
 				else:
 					print "Error updating."
 			else:
-				print config.INVALID_API_KEY
+				raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 		else:
 			print "Error in the server."
 			
@@ -159,7 +159,7 @@ class Project:
 					else:
 						print "Error deleting."
 				else:
-					print config.INVALID_API_KEY
+					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 			else:
 				print "Error in the server."
 		else:
