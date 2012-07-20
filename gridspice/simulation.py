@@ -4,18 +4,13 @@
 class Simulation:
 
     """
-      The GridSpice account object contains the credentials for communication with the model server
+      The GridSpice simulation object contains a project's simulation results
     """
-    def __init__(self, project, models):
-        pass
+    def __init__(self, id, projectId, result, timeStamp):
+        self.id = id
+        self.projectId = projectId
+        self.result = result
+        self.timeStamp = timeStamp
         
-    def getStatus(self):
-        pass
-    
-    def getResults(self):
-        pass
-    
-    def run(self):
-        pass
 
 

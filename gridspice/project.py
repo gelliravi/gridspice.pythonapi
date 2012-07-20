@@ -167,5 +167,17 @@ class Project:
 			
 	def copy(self, account):
 		"""
-		returns a copy of this project
+			returns a copy of this project
 		"""
+	
+	def runSimulation(self):
+		"""
+			runs the simulator on this project
+		"""
+
+	def getSimulationResults(self):
+		"""
+			returns the results of the simulation in the form of Simulation objects
+		"""
+		simulationResults = []
+		return simulationResults
