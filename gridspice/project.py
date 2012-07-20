@@ -7,6 +7,7 @@ import json
 import urllib
 import requests
 import model
+import simulation
 
 class Project:
 
@@ -175,9 +176,23 @@ class Project:
 			runs the simulator on this project
 		"""
 
-	def getSimulationResults(self):
+	def getPastSimulations(self):
 		"""
 			returns the results of the simulation in the form of Simulation objects
 		"""
 		simulationResults = []
+		if (self.id != None):
+			headers = {'APIKey': self.APIKey}
+			payload = {'id': self.id}
+			r = requests.get(config.URL + "multiplesimulations.json", params = payload, headers = headers)
+			if (r.status_code == requests.codes.ok):
+				data = r.text
+				if (data != config.INVALID_API_KEY):
+					simulationJSONList = json.loads(data)
+					for x in simulationJSONList:
+						simulationResults.append(simulation.Simulation(x['id'], self.id))
+				else:
+					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+			else:
+				print "Error in the server."
 		return simulationResults
