@@ -173,12 +173,12 @@ class Project:
 	
 	def runSimulation(self):
 		"""
-			runs the simulator on this project
+			runs the simulator on this project and returns the created Simulation object
 		"""
 
 	def getPastSimulations(self):
 		"""
-			returns the results of the simulation in the form of Simulation objects
+			returns previous simulation headers in the form of Simulation objects
 		"""
 		simulationResults = []
 		if (self.id != None):
