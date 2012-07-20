@@ -175,8 +175,22 @@ class Project:
 		"""
 			runs the simulator on this project and returns the created Simulation object
 		"""
+		simulationResult = None
+		if (self.id != None):
+			headers = {'APIKey': self.APIKey}
+			payload = urllib.urlencode({'id': self.id})
+			r = requests.post(config.URL + "simulations/create", data = payload, headers = headers)
+			if (r.status_code == requests.codes.ok):
+				data = r.text
+				if (data != config.INVALID_API_KEY):
+					simulationResult = simulation.Simulation(int(data), self)
+				else:
+					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+			else:
+				print "Error in the server."
+		return simulationResult
 
-	def getPastSimulations(self):
+	def getSimulations(self):
 		"""
 			returns previous simulation headers in the form of Simulation objects
 		"""
@@ -190,7 +204,7 @@ class Project:
 				if (data != config.INVALID_API_KEY):
 					simulationJSONList = json.loads(data)
 					for x in simulationJSONList:
-						simulationResults.append(simulation.Simulation(x['id'], self.id))
+						simulationResults.append(simulation.Simulation(x['id'], self))
 				else:
 					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 			else:
