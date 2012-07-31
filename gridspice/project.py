@@ -1,3 +1,8 @@
+'''
+Created on Jul 8, 2012
+
+@author: jimmy
+'''
 # Intro To Python:  Modules
 # book.py
 
