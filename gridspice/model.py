@@ -1,5 +1,11 @@
+'''
+Created on Jul 11, 2012
+
+@author: jimmy
+'''
 # Intro To Python:  Modules
 # book.py
+
 import config
 import requests
 import urllib
