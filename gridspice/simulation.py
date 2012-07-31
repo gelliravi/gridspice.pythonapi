@@ -53,7 +53,7 @@ class Simulation:
         if (self.id != None):
             payload = {'id':self.id}
             headers = {'APIKey':self.APIKey}
-            r = requests.get(config.URL + "multiplesimulationresults.json", params = payload, headers = headers)
+            r = requests.get(config.URL + "multipleresults.json", params = payload, headers = headers)
             count = 0
             if (r.status_code == requests.codes.ok):
                 data = r.text

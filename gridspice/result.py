@@ -22,7 +22,7 @@ class Result:
         if (self.blobkey != None):
             payload = {'id': self.blobkey}
             headers = {'APIKey':self.APIKey}
-            r = requests.get(config.URL + "simulationresults/ids", params = payload, headers = headers)
+            r = requests.get(config.URL + "results/ids", params = payload, headers = headers)
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
