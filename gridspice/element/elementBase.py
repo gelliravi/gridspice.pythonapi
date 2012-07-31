@@ -1,0 +1,2 @@
+class elementBase():
+    myProperty = None
