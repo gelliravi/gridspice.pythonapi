@@ -25,9 +25,8 @@ class Simulation:
         
     def load(self):
         """
-            loads the Simulation report
+            loads the Simulation report - May be removing this?
         """
-        self.urls = []
         if (self.id != None):
             payload = {'id':self.id}
             headers = {'APIKey':self.APIKey}
@@ -37,7 +36,6 @@ class Simulation:
                 if (data != config.INVALID_API_KEY):
                     jsonSimulation = json.loads(data)
                     self.id = int(jsonSimulation['id'])
-                    self.deleted = jsonSimulation['deleted'].encode('ascii')
                 else:
                     raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
             print "Simulation " + repr(self.id) + " has been loaded."
