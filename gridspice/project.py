@@ -200,6 +200,7 @@ class Project:
 			returns previous simulation headers in the form of Simulation objects
 		"""
 		simulationResults = []
+		outputString = ""
 		if (self.id != None):
 			headers = {'APIKey': self.APIKey}
 			payload = {'id': self.id}
@@ -208,10 +209,15 @@ class Project:
 				data = r.text
 				if (data != config.INVALID_API_KEY):
 					simulationJSONList = json.loads(data)
+					count = 0
 					for x in simulationJSONList:
-						simulationResults.append(simulation.Simulation(x['id'], self))
+						simulationResults.append(simulation.Simulation(int(x['id']), self))
+						outputString += "(" + repr(count) + ") " + "Simulation " + x['id'] + "  "
+						count = count + 1
 				else:
 					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 			else:
 				print "Error in the server."
+		
+		print outputString
 		return simulationResults

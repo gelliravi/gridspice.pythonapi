@@ -37,11 +37,11 @@ class Simulation:
                 if (data != config.INVALID_API_KEY):
                     jsonSimulation = json.loads(data)
                     self.id = int(jsonSimulation['id'])
-                    self.lastHeartbeat = jsonSimulation['lastHeartbeat']
-                    self.timestamp = jsonSimulation['date']
-                    self.message = jsonSimulation['message']
-                    self.xmlRequest = jsonSimulation['xmlRequest']
-                    self.status = jsonSimulation['status']
+                    self.lastHeartbeat = jsonSimulation['lastHeartbeat'].encode('ascii')
+                    self.timestamp = jsonSimulation['date'].encode('ascii')
+                    self.message = jsonSimulation['message'].encode('ascii')
+                    self.xmlRequest = jsonSimulation['xmlRequest'].encode('ascii')
+                    self.status = jsonSimulation['status'].encode('ascii')
                 else:
                     raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
             print "Simulation " + repr(self.id) + " has been loaded."
