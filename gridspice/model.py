@@ -39,6 +39,7 @@ class Model:
             self.APIKey = project.APIKey
             if (empty == 0):
                 self.counter = 0
+                self.elementDict = []
                 self.climate = config.DEFAULT_CLIMATE
                 self.schematicType = schematicType
                 self.mapType = mapType
@@ -54,7 +55,8 @@ class Model:
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
-                    self.xmldata = data
+                    self.xmldata = data #temporary attribute
+                    self.elementDict = []
                     return 1
                 else: 
                     raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
