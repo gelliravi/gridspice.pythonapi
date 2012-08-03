@@ -22,12 +22,12 @@ class Simulation:
         self.id = id
         self.projectId = project.id
         self.APIKey = project.APIKey
+        self.timezone = config.DEFAULT_TIMEZONE
         
     def load(self):
         """
-            loads the Simulation report
+            loads the Simulation report - May be removing this?
         """
-        self.urls = []
         if (self.id != None):
             payload = {'id':self.id}
             headers = {'APIKey':self.APIKey}
@@ -37,7 +37,11 @@ class Simulation:
                 if (data != config.INVALID_API_KEY):
                     jsonSimulation = json.loads(data)
                     self.id = int(jsonSimulation['id'])
-                    self.deleted = jsonSimulation['deleted'].encode('ascii')
+                    self.lastHeartbeat = jsonSimulation['lastHeartbeat'].encode('ascii')
+                    self.timestamp = jsonSimulation['date'].encode('ascii')
+                    self.message = jsonSimulation['message'].encode('ascii')
+                    self.xmlRequest = jsonSimulation['xmlRequest'].encode('ascii')
+                    self.status = jsonSimulation['status'].encode('ascii')
                 else:
                     raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
             print "Simulation " + repr(self.id) + " has been loaded."
@@ -53,7 +57,7 @@ class Simulation:
         if (self.id != None):
             payload = {'id':self.id}
             headers = {'APIKey':self.APIKey}
-            r = requests.get(config.URL + "multiplesimulationresults.json", params = payload, headers = headers)
+            r = requests.get(config.URL + "multipleresults.json", params = payload, headers = headers)
             count = 0
             if (r.status_code == requests.codes.ok):
                 data = r.text

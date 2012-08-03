@@ -33,6 +33,7 @@ class Model:
     """
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
+
     def __init__(self, name, project=None, schematicType = SchematicType.DISTRIBUTION, mapType = MapType.POLITICAL, empty = 0):
         #if (project.id != None and project.id > 0):
         self.id = None
@@ -52,6 +53,21 @@ class Model:
         #    raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
 
 
+    def _loadElements(self, key):
+        if (key != None):
+            payload = {'id':self.id}
+            headers = {'APIKey':self.APIKey}
+            r = requests.get(config.URL + "multipleelements.xml", params = payload, headers = headers)
+            if (r.status_code == requests.codes.ok):
+                data = r.text
+                if (data != config.INVALID_API_KEY):
+                    self.xmldata = data
+                    return 1
+                else: 
+                    raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+        return 0
+
+
     def load(self):
 	"""
 	   fills in the other information to the model object
@@ -68,8 +84,9 @@ class Model:
                     self.climate = jsonModel['climate'].encode('ascii')
                     self.schematicType = jsonModel['schematicType'].encode('ascii')
                     self.mapType = jsonModel['mapType'].encode('ascii')
-                    self.loaded = 1
-                    print self.name + " has been loaded."
+                    self.loaded = self._loadElements(jsonModel['modelDataKey'].encode('ascii'))
+                    if (self.loaded == 1):
+                        print self.name + " has been loaded."
                 else:
                     raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
         else:
