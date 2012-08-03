@@ -49,7 +49,7 @@ class Model:
     
     def _loadElements(self, key):
         if (key != None):
-            payload = {'id':self.id}
+            payload = {'id':key}
             headers = {'APIKey':self.APIKey}
             r = requests.get(config.URL + "multipleelements.xml", params = payload, headers = headers)
             if (r.status_code == requests.codes.ok):
