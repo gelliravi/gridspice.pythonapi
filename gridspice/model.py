@@ -7,9 +7,9 @@ Created on Jul 11, 2012
 # book.py
 
 import config
-import requests
 import urllib
 import json
+import requests
 
 class SchematicType:
     """
@@ -26,30 +26,27 @@ class MapType:
     BLANK = "BLANK"
     POLITICAL = "POLITICAL"
 
-class Model:
-
-    
-    
+class Model:    
     """
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
     def __init__(self, name, project=None, schematicType = SchematicType.DISTRIBUTION, mapType = MapType.POLITICAL, empty = 0):
-        #if (project.id != None and project.id > 0):
-        self.id = None
-        self.name = name
-        self.loaded = 0
-        self.APIKey = project.APIKey
-        self.elementDict = []
-        self.project = project
-        if (empty == 0):
-            self.counter = 0
-            self.climate = config.DEFAULT_CLIMATE
-            self.schematicType = schematicType
-            self.mapType = mapType
-            self.loaded = 1
+        if (project.id != None and project.id > 0):
+            self.id = None
+            self.name = name
+            self.loaded = 0
+            self.APIKey = project.APIKey
+            self.projectId = project.id
+            if (empty == 0):
+                self.elementDict = []
+                self.counter = 0
+                self.climate = config.DEFAULT_CLIMATE
+                self.schematicType = schematicType
+                self.mapType = mapType
+                self.loaded = 1
                 
-        #else:
-        #    raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
+        else:
+            raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
 
     def _loadElements(self, key):
         if (key != None):
@@ -95,8 +92,6 @@ class Model:
     def _store(self):  
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
-        del dictCopy['project']
-        
         headers = {'APIKey':self.APIKey}
         d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":x.__class__.__name__}.items()), dictCopy['elementDict'])}
         dictCopy = dict(dictCopy.items() + d2.items())
@@ -120,7 +115,6 @@ class Model:
     def _update(self):
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
-        
         headers = {'APIKey':self.APIKey}
         d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":x.__class__.__name__}.items()), dictCopy['elementDict'])}
         dictCopy = dict(dictCopy.items() + d2.items())
@@ -142,10 +136,9 @@ class Model:
             print "Error in the server."
             
     def save(self):
-	"""
-	   saves this model
-	"""
-        self.projectId = self.project.id  
+        """
+            saves this model
+        """
         if (self.loaded == 1):
             if (self.id is None):
                 self._store()
@@ -155,9 +148,9 @@ class Model:
             print "Please load " + self.name + " before updating."
 
     def	delete(self):
-	"""
-	   deletes this model
-	"""
+        """
+           deletes this model
+        """
         if (self.id != None):
             headers = {'APIKey':self.APIKey, 'Content-Length':'0'}
             r = requests.post(config.URL + "models/destroy/" + repr(self.id), headers = headers)
@@ -179,19 +172,19 @@ class Model:
 
 
     def	add (self, element):
-	"""
-	   Adds the element to the model
-	"""
+        """
+    	   Adds the element to the model
+    	"""
         self.elementDict.append(element)
-	
+        
     def	remove(self, element):
-	"""	
-	   Removes the element from the model
-	"""
+        """	
+    	   Removes the element from the model
+    	"""
         self.elementDict.remove(element)
        
     def	copy(self, project):
-	"""
-	   Returns a copy of this model
-    """
+        """
+    	   Returns a copy of this model
+        """
     

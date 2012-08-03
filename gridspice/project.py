@@ -61,7 +61,7 @@ class Project:
 						outputString += "(" + repr(count) + ") " + mod.name + "  "
 						count = count + 1
 				else:
-					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 		else:
 			print "This project has not yet been stored."
 		
@@ -92,7 +92,7 @@ class Project:
 						self.modules[key.encode('ascii')] = tempModules[key].encode('ascii')
 					print "Project " + self.name + " has been loaded."
 				else:
-					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 		else:
 			print self.name + " has not yet been stored in the database."
 	
@@ -112,7 +112,7 @@ class Project:
 				else:
 					print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
 			else:
-				raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+				raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 		else:
 			print "Error in the server."	
 			
@@ -132,7 +132,7 @@ class Project:
 				else:
 					print "Error updating."
 			else:
-				raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+				raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 		else:
 			print "Error in the server."
 			
@@ -165,7 +165,7 @@ class Project:
 					else:
 						print "Error deleting."
 				else:
-					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 			else:
 				print "Error in the server."
 		else:
@@ -190,7 +190,7 @@ class Project:
 				if (data != config.INVALID_API_KEY):
 					simulationResult = simulation.Simulation(int(data), self)
 				else:
-					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 			else:
 				print "Error in the server."
 		return simulationResult
@@ -215,7 +215,7 @@ class Project:
 						outputString += "(" + repr(count) + ") " + "Simulation " + x['id'] + "  "
 						count = count + 1
 				else:
-					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 			else:
 				print "Error in the server."
 		

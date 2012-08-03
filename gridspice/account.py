@@ -10,8 +10,8 @@ Created on Jul 7, 2012
 import config
 import project
 import json
-import requests
 import webbrowser
+import requests
 
 class Account:
 	"""
@@ -30,7 +30,7 @@ class Account:
 					self.APIKey = APIKey
 					print "Welcome " + self.email + "!"
 				else:   
-					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 
 	def getProjects(self):
 		"""
@@ -53,7 +53,7 @@ class Account:
 					outputString += "(" + repr(count) + ") " + x['name'] + "  "
 					count = count + 1
 			else:
-				raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+				raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 		print outputString
 		return emptyProjects
 

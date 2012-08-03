@@ -28,7 +28,7 @@ class Result:
                 if (data != config.INVALID_API_KEY):
                     self.content = data.encode('ascii')
                 else:
-                    raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+                    raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
             print "Result " + self.filename + " has been loaded."
         else:
             print "File " + self.filename + " cannot be found."

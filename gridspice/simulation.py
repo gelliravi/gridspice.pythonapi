@@ -43,7 +43,7 @@ class Simulation:
                     self.xmlRequest = jsonSimulation['xmlRequest'].encode('ascii')
                     self.status = jsonSimulation['status'].encode('ascii')
                 else:
-                    raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+                    raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
             print "Simulation " + repr(self.id) + " has been loaded."
         else:
             print "Simulation " + repr(self.id) + " has not yet been stored in the database."
@@ -69,7 +69,7 @@ class Simulation:
                         outputString += "(" + repr(count) + ") " + res.filename + "  "
                         count = count + 1
                 else:
-                    raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
+                    raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
         else:
             print "This simulation has no id."
         

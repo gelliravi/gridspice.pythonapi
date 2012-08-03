@@ -59,9 +59,17 @@
             
   <div class="section" id="module-gridspice.model">
 <span id="gridspice-model"></span><h1>gridspice.model<a class="headerlink" href="#module-gridspice.model" title="Permalink to this headline">¶</a></h1>
+<p>Created on Jul 11, 2012</p>
+<p>&#64;author: jimmy</p>
+<dl class="class">
+<dt id="gridspice.model.MapType">
+<em class="property">class </em><tt class="descclassname">gridspice.model.</tt><tt class="descname">MapType</tt><a class="headerlink" href="#gridspice.model.MapType" title="Permalink to this definition">¶</a></dt>
+<dd><p>MapType contains two constants which represent the map type: BLANK, POLITICAL</p>
+</dd></dl>
+
 <dl class="class">
 <dt id="gridspice.model.Model">
-<em class="property">class </em><tt class="descclassname">gridspice.model.</tt><tt class="descname">Model</tt><big>(</big><em>name</em>, <em>project</em><big>)</big><a class="headerlink" href="#gridspice.model.Model" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">gridspice.model.</tt><tt class="descname">Model</tt><big>(</big><em>name</em>, <em>project=None</em>, <em>schematicType='DISTRIBUTION'</em>, <em>mapType='POLITICAL'</em>, <em>empty=0</em><big>)</big><a class="headerlink" href="#gridspice.model.Model" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GridSpice model contains the network model (transmission, distribution, etc)</p>
 <dl class="method">
 <dt id="gridspice.model.Model.add">
@@ -99,6 +107,12 @@
 <dd><p>saves this model</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="gridspice.model.SchematicType">
+<em class="property">class </em><tt class="descclassname">gridspice.model.</tt><tt class="descname">SchematicType</tt><a class="headerlink" href="#gridspice.model.SchematicType" title="Permalink to this definition">¶</a></dt>
+<dd><p>SchematicType contains three constants which represent the model type: UNKNOWN, TRANSMISSION, DISTRIBUTION</p>
 </dd></dl>
 
 </div>

@@ -28,7 +28,6 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="GridSpice 0.1 documentation" href="../index.html" />
     <link rel="up" title="Python API Reference" href="index.html" />
-    <link rel="next" title="gridspice.element" href="gridspice.element.html" />
     <link rel="prev" title="gridspice.simulation" href="gridspice.simulation.html" /> 
   </head>
   <body>
@@ -41,9 +40,6 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="gridspice.element.html" title="gridspice.element"
-             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="gridspice.simulation.html" title="gridspice.simulation"
              accesskey="P">previous</a> |</li>
@@ -59,6 +55,8 @@
             
   <div class="section" id="module-gridspice.project">
 <span id="gridspice-project"></span><h1>gridspice.project<a class="headerlink" href="#module-gridspice.project" title="Permalink to this headline">¶</a></h1>
+<p>Created on Jul 8, 2012</p>
+<p>&#64;author: jimmy</p>
 <dl class="class">
 <dt id="gridspice.project.Project">
 <em class="property">class </em><tt class="descclassname">gridspice.project.</tt><tt class="descname">Project</tt><big>(</big><em>name</em>, <em>account</em>, <em>empty=0</em><big>)</big><a class="headerlink" href="#gridspice.project.Project" title="Permalink to this definition">¶</a></dt>
@@ -77,15 +75,27 @@ which pertain to all models in the simulation.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="gridspice.project.Project.getEmptyModels">
-<tt class="descname">getEmptyModels</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.project.Project.getEmptyModels" title="Permalink to this definition">¶</a></dt>
+<dt id="gridspice.project.Project.getModels">
+<tt class="descname">getModels</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.project.Project.getModels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the models associated with this project (Models need to be loaded.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gridspice.project.Project.getSimulations">
+<tt class="descname">getSimulations</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.project.Project.getSimulations" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns previous simulation headers in the form of Simulation objects</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="gridspice.project.Project.load">
 <tt class="descname">load</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.project.Project.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>fills in the other information to the project object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gridspice.project.Project.runSimulation">
+<tt class="descname">runSimulation</tt><big>(</big><big>)</big><a class="headerlink" href="#gridspice.project.Project.runSimulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>runs the simulator on this project and returns the created Simulation object</p>
 </dd></dl>
 
 <dl class="method">
@@ -107,9 +117,6 @@ which pertain to all models in the simulation.</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="gridspice.simulation.html"
                         title="previous chapter">gridspice.simulation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="gridspice.element.html"
-                        title="next chapter">gridspice.element</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/reference/gridspice.project.txt"
@@ -141,9 +148,6 @@ which pertain to all models in the simulation.</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="gridspice.element.html" title="gridspice.element"
-             >next</a> |</li>
         <li class="right" >
           <a href="gridspice.simulation.html" title="gridspice.simulation"
              >previous</a> |</li>
