@@ -2,129 +2,127 @@ from .. import elementBase
 
 class powerflow_object(elementBase.elementBase):
 	def __init__(self):
-		pass
 
-	phases=None
-	"""
-	"""
-
-	nominal_voltage=None
-	"""
-	Units: V
-	"""
+		self.phases=None
+		"""
+		"""
+	
+		self.nominal_voltage=None
+		"""
+		Units: V
+		"""
 
 
 
 
 class node(powerflow_object):
 	def __init__(self):
-		pass
-
-	bustype=None
-	"""
-	"""
-
-	busflags=None
-	"""
-	"""
-
-	reference_bus=None
-	"""
-	"""
-
-	maximum_voltage_error=None
-	"""
-	Units: V
-	"""
-
-	voltage_A=None
-	"""
-	Units: V
-	"""
-
-	voltage_B=None
-	"""
-	Units: V
-	"""
-
-	voltage_C=None
-	"""
-	Units: V
-	"""
-
-	voltage_AB=None
-	"""
-	Units: V
-	"""
-
-	voltage_BC=None
-	"""
-	Units: V
-	"""
-
-	voltage_CA=None
-	"""
-	Units: V
-	"""
-
-	current_A=None
-	"""
-	Units: A
-	"""
-
-	current_B=None
-	"""
-	Units: A
-	"""
-
-	current_C=None
-	"""
-	Units: A
-	"""
-
-	power_A=None
-	"""
-	Units: VA
-	"""
-
-	power_B=None
-	"""
-	Units: VA
-	"""
-
-	power_C=None
-	"""
-	Units: VA
-	"""
-
-	shunt_A=None
-	"""
-	Units: S
-	"""
-
-	shunt_B=None
-	"""
-	Units: S
-	"""
-
-	shunt_C=None
-	"""
-	Units: S
-	"""
-
-	NR_mode=None
-	"""
-	"""
-
-	mean_repair_time=None
-	"""
-	Units: s
-	Description: Time after a fault clears for the object to be back in service
-	"""
-
-	service_status=None
-	"""
-	"""
+		
+		self.bustype=None
+		"""
+		"""
+	
+		self.busflags=None
+		"""
+		"""
+	
+		self.reference_bus=None
+		"""
+		"""
+	
+		self.maximum_voltage_error=None
+		"""
+		Units: V
+		"""
+	
+		self.voltage_A=None
+		"""
+		Units: V
+		"""
+	
+		self.voltage_B=None
+		"""
+		Units: V
+		"""
+	
+		self.voltage_C=None
+		"""
+		Units: V
+		"""
+	
+		self.voltage_AB=None
+		"""
+		Units: V
+		"""
+	
+		self.voltage_BC=None
+		"""
+		Units: V
+		"""
+	
+		self.voltage_CA=None
+		"""
+		Units: V
+		"""
+	
+		self.current_A=None
+		"""
+		Units: A
+		"""
+	
+		self.current_B=None
+		"""
+		Units: A
+		"""
+	
+		self.current_C=None
+		"""
+		Units: A
+		"""
+	
+		self.power_A=None
+		"""
+		Units: VA
+		"""
+	
+		self.power_B=None
+		"""
+		Units: VA
+		"""
+	
+		self.power_C=None
+		"""
+		Units: VA
+		"""
+	
+		self.shunt_A=None
+		"""
+		Units: S
+		"""
+	
+		self.shunt_B=None
+		"""
+		Units: S
+		"""
+	
+		self.shunt_C=None
+		"""
+		Units: S
+		"""
+	
+		self.NR_mode=None
+		"""
+		"""
+	
+		self.mean_repair_time=None
+		"""
+		Units: s
+		Description: Time after a fault clears for the object to be back in service
+		"""
+	
+		self.service_status=None
+		"""
+		"""
 
 
 
@@ -426,196 +424,193 @@ class fuse(link):
 
 class meter(node):
 	def __init__(self):
-		pass
+		self.measured_real_energy=None
+		"""
+		Units: Wh
+		"""
 
-	measured_real_energy=None
-	"""
-	Units: Wh
-	"""
+		self.measured_reactive_energy=None
+		"""
+		Units: VAh
+		"""
 
-	measured_reactive_energy=None
-	"""
-	Units: VAh
-	"""
-
-	measured_power=None
-	"""
-	Units: VA
-	"""
-
-	measured_power_A=None
-	"""
-	Units: VA
-	"""
-
-	measured_power_B=None
-	"""
-	Units: VA
-	"""
-
-	measured_power_C=None
-	"""
-	Units: VA
-	"""
-
-	measured_demand=None
-	"""
-	Units: W
-	"""
-
-	measured_real_power=None
-	"""
-	Units: W
-	"""
-
-	measured_reactive_power=None
-	"""
-	Units: VAr
-	"""
-
-	meter_power_consumption=None
-	"""
-	Units: VA
-	"""
-
-	measured_voltage_A=None
-	"""
-	Units: V
-	"""
-
-	measured_voltage_B=None
-	"""
-	Units: V
-	"""
-
-	measured_voltage_C=None
-	"""
-	Units: V
-	"""
-
-	measured_voltage_AB=None
-	"""
-	Units: V
-	"""
-
-	measured_voltage_BC=None
-	"""
-	Units: V
-	"""
-
-	measured_voltage_CA=None
-	"""
-	Units: V
-	"""
-
-	measured_current_A=None
-	"""
-	Units: A
-	"""
-
-	measured_current_B=None
-	"""
-	Units: A
-	"""
-
-	measured_current_C=None
-	"""
-	Units: A
-	"""
-
-	customer_interrupted=None
-	"""
-	"""
-
-	customer_interrupted_secondary=None
-	"""
-	"""
-
-	monthly_bill=None
-	"""
-	"""
-
-	previous_monthly_bill=None
-	"""
-	"""
-
-	previous_monthly_energy=None
-	"""
-	Units: kWh
-	"""
-
-	monthly_fee=None
-	"""
-	"""
-
-	monthly_energy=None
-	"""
-	Units: kWh
-	"""
-
-	bill_mode=None
-	"""
-	"""
-
-	power_market=None
-	"""
-	"""
-
-	bill_day=None
-	"""
-	"""
-
-	price=None
-	"""
-	"""
-
-	price_base=None
-	"""
-	Description: Used only in TIERED_RTP mode to describe the price before the first tier
-	"""
-
-	first_tier_price=None
-	"""
-	"""
-
-	first_tier_energy=None
-	"""
-	Units: kWh
-	"""
-
-	second_tier_price=None
-	"""
-	"""
-
-	second_tier_energy=None
-	"""
-	Units: kWh
-	"""
-
-	third_tier_price=None
-	"""
-	"""
-
-	third_tier_energy=None
-	"""
-	Units: kWh
-	"""
+		measured_power=None
+		"""
+		Units: VA
+		"""
+	
+		measured_power_A=None
+		"""
+		Units: VA
+		"""
+	
+		measured_power_B=None
+		"""
+		Units: VA
+		"""
+	
+		self.measured_power_C=None
+		"""
+		Units: VA
+		"""
+	
+		self.measured_demand=None
+		"""
+		Units: W
+		"""
+	
+		self.measured_real_power=None
+		"""
+		Units: W
+		"""
+	
+		self.measured_reactive_power=None
+		"""
+		Units: VAr
+		"""
+	
+		self.meter_power_consumption=None
+		"""
+		Units: VA
+		"""
+	
+		self.measured_voltage_A=None
+		"""
+		Units: V
+		"""
+	
+		self.measured_voltage_B=None
+		"""
+		Units: V
+		"""
+	
+		self.measured_voltage_C=None
+		"""
+		Units: V
+		"""
+	
+		self.measured_voltage_AB=None
+		"""
+		Units: V
+		"""
+	
+		self.measured_voltage_BC=None
+		"""
+		Units: V
+		"""
+	
+		self.measured_voltage_CA=None
+		"""
+		Units: V
+		"""
+	
+		self.measured_current_A=None
+		"""
+		Units: A
+		"""
+	
+		self.measured_current_B=None
+		"""
+		Units: A
+		"""
+	
+		self.measured_current_C=None
+		"""
+		Units: A
+		"""
+	
+		self.customer_interrupted=None
+		"""
+		"""
+	
+		self.customer_interrupted_secondary=None
+		"""
+		"""
+	
+		self.monthly_bill=None
+		"""
+		"""
+	
+		self.previous_monthly_bill=None
+		"""
+		"""
+	
+		self.previous_monthly_energy=None
+		"""
+		Units: kWh
+		"""
+	
+		self.monthly_fee=None
+		"""
+		"""
+	
+		self.monthly_energy=None
+		"""
+		Units: kWh
+		"""
+	
+		self.bill_mode=None
+		"""
+		"""
+	
+		self.power_market=None
+		"""
+		"""
+	
+		self.bill_day=None
+		"""
+		"""
+	
+		self.price=None
+		"""
+		"""
+	
+		self.price_base=None
+		"""
+		Description: Used only in TIERED_RTP mode to describe the price before the first tier
+		"""
+	
+		self.first_tier_price=None
+		"""
+		"""
+	
+		self.first_tier_energy=None
+		"""
+		Units: kWh
+		"""
+	
+		self.second_tier_price=None
+		"""
+		"""
+	
+		self.second_tier_energy=None
+		"""
+		Units: kWh
+		"""
+	
+		self.third_tier_price=None
+		"""
+		"""
+	
+		self.third_tier_energy=None
+		"""
+		Units: kWh
+		"""
 
 
 
 
 class line(link):
 	def __init__(self):
-		pass
-
-	configuration=None
-	"""
-	"""
-
-	length=None
-	"""
-	Units: ft
-	"""
+	
+		self.configuration=None
+		"""
+		"""
+	
+		self.length=None
+		"""
+		Units: ft
+		"""
 
 
 
@@ -665,11 +660,10 @@ class relay(link):
 
 class transformer(link):
 	def __init__(self):
-		pass
 
-	configuration=None
-	"""
-	"""
+		self.configuration=None
+		"""
+		"""
 
 
 
@@ -1782,23 +1776,22 @@ class motor(node):
 
 class recloser(switch):
 	def __init__(self):
-		pass
 
-	retry_time=None
-	"""
-	Units: s
-	Description: the amount of time in seconds to wait before the recloser attempts to close
-	"""
-
-	max_number_of_tries=None
-	"""
-	Description: the number of times the recloser will try to close before permanently opening
-	"""
-
-	number_of_tries=None
-	"""
-	Description: Current number of tries recloser has attempted
-	"""
+		self.retry_time=None
+		"""
+		Units: s
+		Description: the amount of time in seconds to wait before the recloser attempts to close
+		"""
+	
+		self.max_number_of_tries=None
+		"""
+		Description: the number of times the recloser will try to close before permanently opening
+		"""
+	
+		self.number_of_tries=None
+		"""
+		Description: Current number of tries recloser has attempted
+		"""
 
 
 

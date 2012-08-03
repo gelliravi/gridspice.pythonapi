@@ -10,6 +10,8 @@ import config
 import urllib
 import json
 import requests
+import element
+import json
 
 class SchematicType:
     """
@@ -56,8 +58,18 @@ class Model:
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
-                    self.xmldata = data.encode('ascii') #temporary attribute
                     self.elementDict = []
+                    jsondata = data.encode('ascii') #temporary attribute
+                    jsonElemList = json.loads(jsondata)
+                    for jsonElem in jsonElemList:
+                        elemType = eval(jsonElem['objectType'].encode('ascii'))
+                        dict = jsonElem.copy()
+                        del dict['objectType']
+                        for key in dict:
+                            dict[key] = dict[key].encode('ascii')
+                        elem = elemType()
+                        elem.__dict__.update(dict)
+                        self.elementDict.append(elem)
                     return 1
                 else: 
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
@@ -93,7 +105,7 @@ class Model:
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
         headers = {'APIKey':self.APIKey}
-        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":x.__class__.__name__}.items()), dictCopy['elementDict'])}
+        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." +x.__class__.__name__)}.items()), dictCopy['elementDict'])}
         dictCopy = dict(dictCopy.items() + d2.items())
         payload = urllib.urlencode(dictCopy)
         
@@ -116,7 +128,7 @@ class Model:
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
         headers = {'APIKey':self.APIKey}
-        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":x.__class__.__name__}.items()), dictCopy['elementDict'])}
+        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." + x.__class__.__name__)}.items()), dictCopy['elementDict'])}
         dictCopy = dict(dictCopy.items() + d2.items())
         payload = urllib.urlencode(dictCopy)
         r = requests.post(config.URL + "models/update", data=payload, headers = headers)
@@ -175,16 +187,22 @@ class Model:
         """
     	   Adds the element to the model
     	"""
-        self.elementDict.append(element)
+        if (self.loaded == 1):
+            self.elementDict.append(element)
+        else:
+            print "Please load this model first."
         
     def	remove(self, element):
         """	
     	   Removes the element from the model
     	"""
-        self.elementDict.remove(element)
+        if (self.loaded == 1):
+            self.elementDict.remove(element)
+        else:
+            print "Please load this model first."
        
     def	copy(self, project):
         """
-    	   Returns a copy of this model
+    	   Returns a copy of this model within the provided project.
         """
     
