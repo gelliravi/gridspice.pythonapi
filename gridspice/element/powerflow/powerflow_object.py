@@ -2,7 +2,7 @@ from .. import elementBase
 
 class powerflow_object(elementBase.elementBase):
 	def __init__(self):
-
+		super(powerflow_object,self).__init__()
 		self.phases=None
 		"""
 		"""
@@ -17,7 +17,7 @@ class powerflow_object(elementBase.elementBase):
 
 class node(powerflow_object):
 	def __init__(self):
-		
+		super(node, self).__init__()
 		self.bustype=None
 		"""
 		"""

@@ -77,9 +77,9 @@ class Model:
 
 
     def load(self):
-	"""
-	   fills in the other information to the model object
-	"""
+        """
+            fills in the other information to the model object
+    	"""
         if (self.id != None):
             payload = {'id':self.id}
             headers = {'APIKey':self.APIKey}
