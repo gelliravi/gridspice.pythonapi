@@ -1,2 +1,3 @@
 class elementBase():
-    myProperty = None
+    def __init__ (self):
+        self.newName="test"

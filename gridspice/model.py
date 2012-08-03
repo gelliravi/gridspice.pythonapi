@@ -27,24 +27,29 @@ class MapType:
     POLITICAL = "POLITICAL"
 
 class Model:
+
+    
+    
     """
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
-    def __init__(self, name, project, schematicType = SchematicType.DISTRIBUTION, mapType = MapType.POLITICAL, empty = 0):
-        if (project.id != None and project.id > 0):
-            self.id = None
-            self.name = name
-            self.projectId = project.id    
-            self.loaded = 0
-            self.APIKey = project.APIKey
-            if (empty == 0):
-                self.counter = 0
-                self.climate = config.DEFAULT_CLIMATE
-                self.schematicType = schematicType
-                self.mapType = mapType
-                self.loaded = 1
-        else:
-            raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
+    def __init__(self, name, project=None, schematicType = SchematicType.DISTRIBUTION, mapType = MapType.POLITICAL, empty = 0):
+        #if (project.id != None and project.id > 0):
+        self.id = None
+        self.name = name
+        self.loaded = 0
+        self.APIKey = project.APIKey
+        self.elementDict = []
+        self.project = project
+        if (empty == 0):
+            self.counter = 0
+            self.climate = config.DEFAULT_CLIMATE
+            self.schematicType = schematicType
+            self.mapType = mapType
+            self.loaded = 1
+                
+        #else:
+        #    raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
 
 
     def load(self):
@@ -71,11 +76,16 @@ class Model:
             print self.name + " has not yet been stored in the database."
             
             
-    def _store(self):
+    def _store(self):  
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
-        payload = urllib.urlencode(dictCopy)
+        del dictCopy['project']
+        
         headers = {'APIKey':self.APIKey}
+        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":x.__class__.__name__}.items()), dictCopy['elementDict'])}
+        dictCopy = dict(dictCopy.items() + d2.items())
+        payload = urllib.urlencode(dictCopy)
+        
         r = requests.post(config.URL + "models/create", data=payload, headers = headers)
         if (r.status_code == requests.codes.ok):
             data = r.text
@@ -85,7 +95,7 @@ class Model:
                     self.id = result
                     print self.name + " has been stored in the database."
                 else:
-                    print "Error saving. A different version of this project already exists. Has " + self.name + " been loaded?"
+                    print "Error saving. A different version of this model already exists. Has '" + self.name + "' been loaded?"
             else:
                 raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
         else:
@@ -94,9 +104,13 @@ class Model:
     def _update(self):
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
-        payload = urllib.urlencode(dictCopy)
+        
         headers = {'APIKey':self.APIKey}
+        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":x.__class__.__name__}.items()), dictCopy['elementDict'])}
+        dictCopy = dict(dictCopy.items() + d2.items())
+        payload = urllib.urlencode(dictCopy)
         r = requests.post(config.URL + "models/update", data=payload, headers = headers)
+        
         if (r.status_code == requests.codes.ok):
             data = r.text
             if (data != config.INVALID_API_KEY):
@@ -115,6 +129,7 @@ class Model:
 	"""
 	   saves this model
 	"""
+        self.projectId = self.project.id  
         if (self.loaded == 1):
             if (self.id is None):
                 self._store()
@@ -151,13 +166,16 @@ class Model:
 	"""
 	   Adds the element to the model
 	"""
+        self.elementDict.append(element)
 	
     def	remove(self, element):
 	"""	
 	   Removes the element from the model
 	"""
-	
+        self.elementDict.remove(element)
+       
     def	copy(self, project):
 	"""
 	   Returns a copy of this model
     """
+    
