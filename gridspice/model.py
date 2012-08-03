@@ -56,7 +56,7 @@ class Model:
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
-                    self.xmldata = data #temporary attribute
+                    self.xmldata = data.encode('ascii') #temporary attribute
                     self.elementDict = []
                     return 1
                 else: 
