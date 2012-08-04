@@ -47,7 +47,7 @@ class Simulation:
             print "Simulation " + repr(self.id) + " has been loaded."
         else:
             print "Simulation " + repr(self.id) + " has not yet been stored in the database."
-            
+
     def getResults(self):
         """    
         Gets the models associated with this project (Models need to be loaded.)

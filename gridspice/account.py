@@ -30,7 +30,7 @@ class Account:
 					self.APIKey = APIKey
 					print "Welcome " + self.email + "!"
 				else:   
-					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
+					raise ValueError("'" + APIKey + "'"  + " is not a valid API key.")
 
 	def getProjects(self):
 		"""
