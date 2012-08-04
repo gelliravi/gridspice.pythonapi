@@ -193,6 +193,8 @@ class Project:
 					raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 			else:
 				print "Error in the server."
+		else:
+			print "This project has not yet been stored."
 		return simulationResult
 
 	def getSimulations(self):
