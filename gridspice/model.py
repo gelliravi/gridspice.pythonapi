@@ -51,6 +51,7 @@ class Model:
             raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
 
     def _loadElements(self, key):
+        self.elementDict = []
         if (key != None):
             payload = {'id':key}
             headers = {'APIKey':self.APIKey}
@@ -58,7 +59,6 @@ class Model:
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
-                    self.elementDict = []
                     jsondata = data.encode('ascii') #temporary attribute
                     jsonElemList = json.loads(jsondata)
                     for jsonElem in jsonElemList:
@@ -70,10 +70,8 @@ class Model:
                         elem = elemType()
                         elem.__dict__.update(dict)
                         self.elementDict.append(elem)
-                    return 1
                 else: 
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
-        return 0
 
 
     def load(self):
@@ -92,9 +90,12 @@ class Model:
                     self.climate = jsonModel['climate'].encode('ascii')
                     self.schematicType = jsonModel['schematicType'].encode('ascii')
                     self.mapType = jsonModel['mapType'].encode('ascii')
-                    self.loaded = self._loadElements(jsonModel['modelDataKey'].encode('ascii'))
-                    if (self.loaded == 1):
-                        print self.name + " has been loaded."
+                    blobkey = None
+                    if ('modelDataKey' in jsonModel):
+                        blobkey = jsonModel['modelDataKey'].encode('ascii')
+                    self._loadElements(blobkey)
+                    self.loaded == 1
+                    print self.name + " has been loaded."
                 else:
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
         else:
@@ -205,4 +206,4 @@ class Model:
         """
     	   Returns a copy of this model within the provided project.
         """
-    
+
