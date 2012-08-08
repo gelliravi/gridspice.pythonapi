@@ -55,7 +55,7 @@ class Model:
         if (key != None):
             payload = {'id':key}
             headers = {'APIKey':self.APIKey}
-            r = requests.get(config.URL + "multipleelements.xml", params = payload, headers = headers)
+            r = requests.get(config.URL + "multipleelements.json", params = payload, headers = headers)
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
@@ -63,12 +63,12 @@ class Model:
                     jsonElemList = json.loads(jsondata)
                     for jsonElem in jsonElemList:
                         elemType = eval(jsonElem['objectType'].encode('ascii'))
-                        dict = jsonElem.copy()
-                        del dict['objectType']
-                        for key in dict:
-                            dict[key] = dict[key].encode('ascii')
+                        dictCopy = {}
+                        for key in jsonElem:
+                            dictCopy[key.encode('ascii')] = jsonElem[key].encode('ascii')
+                        del dictCopy['objectType']
                         elem = elemType()
-                        elem.__dict__.update(dict)
+                        elem.__dict__.update(dictCopy)
                         self.elementDict.append(elem)
                 else: 
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
@@ -94,7 +94,7 @@ class Model:
                     if ('modelDataKey' in jsonModel):
                         blobkey = jsonModel['modelDataKey'].encode('ascii')
                     self._loadElements(blobkey)
-                    self.loaded == 1
+                    self.loaded = 1
                     print self.name + " has been loaded."
                 else:
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
