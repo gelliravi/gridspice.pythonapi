@@ -65,7 +65,8 @@ class Model:
                         elemType = eval(jsonElem['objectType'].encode('ascii'))
                         dictCopy = {}
                         for key in jsonElem:
-                            dictCopy[key.encode('ascii')] = jsonElem[key].encode('ascii')
+                            if (jsonElem[key] != None):
+                                dictCopy[key.encode('ascii')] = jsonElem[key].encode('ascii')
                         del dictCopy['objectType']
                         elem = elemType()
                         elem.__dict__.update(dictCopy)
@@ -106,8 +107,9 @@ class Model:
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
         headers = {'APIKey':self.APIKey}
-        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." +x.__class__.__name__)}.items()), dictCopy['elementDict'])}
-        dictCopy = dict(dictCopy.items() + d2.items())
+        elementDictCopy = map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." + x.__class__.__name__)}.items()), dictCopy['elementDict'])
+        jsonElems = json.dumps(elementDictCopy)
+        dictCopy['elementDict'] = jsonElems
         payload = urllib.urlencode(dictCopy)
         
         r = requests.post(config.URL + "models/create", data=payload, headers = headers)
@@ -129,8 +131,9 @@ class Model:
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
         headers = {'APIKey':self.APIKey}
-        d2 = {'elementDict' : map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." + x.__class__.__name__)}.items()), dictCopy['elementDict'])}
-        dictCopy = dict(dictCopy.items() + d2.items())
+        elementDictCopy = map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." + x.__class__.__name__)}.items()), dictCopy['elementDict'])
+        jsonElems = json.dumps(elementDictCopy)
+        dictCopy['elementDict'] = jsonElems
         payload = urllib.urlencode(dictCopy)
         r = requests.post(config.URL + "models/update", data=payload, headers = headers)
         
@@ -184,21 +187,23 @@ class Model:
             print self.name + "has not yet been stored in the database"
 
 
-    def	add (self, element):
+    def	add (self, elem):
         """
     	   Adds the element to the model
     	"""
+        if (elem.name == None):
+            raise ValueError("All elements must have names.");
         if (self.loaded == 1):
-            self.elementDict.append(element)
+            self.elementDict.append(elem)
         else:
             print "Please load this model first."
         
-    def	remove(self, element):
+    def	remove(self, elem):
         """	
     	   Removes the element from the model
     	"""
         if (self.loaded == 1):
-            self.elementDict.remove(element)
+            self.elementDict.remove(elem)
         else:
             print "Please load this model first."
        
