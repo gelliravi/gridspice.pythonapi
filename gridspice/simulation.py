@@ -34,6 +34,8 @@ class Simulation:
             r = requests.get(config.URL + "simulations/ids", params = payload, headers = headers)
             if (r.status_code == requests.codes.ok):
                 data = r.text
+                print data
+                
                 if (data != config.INVALID_API_KEY):
                     jsonSimulation = json.loads(data)
                     self.id = int(jsonSimulation['id'])
@@ -42,6 +44,8 @@ class Simulation:
                     self.message = jsonSimulation['message'].encode('ascii')
                     self.xmlRequest = jsonSimulation['xmlRequest'].encode('ascii')
                     self.status = jsonSimulation['status'].encode('ascii')
+                    #TODO list of keys. Instantiate here.
+                    self.keys = []
                 else:
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
             print "Simulation " + repr(self.id) + " has been loaded."
@@ -55,21 +59,15 @@ class Simulation:
         emptyResults = []
         outputString = ""
         if (self.id != None):
-            payload = {'id':self.id}
-            headers = {'APIKey':self.APIKey}
-            r = requests.get(config.URL + "multipleresults.json", params = payload, headers = headers)
             count = 0
-            if (r.status_code == requests.codes.ok):
-                data = r.text
-                if (data != config.INVALID_API_KEY):
-                    jsonList = json.loads(data)
-                    for x in jsonList:
-                        res = result.Result(x['fileName'].encode('ascii'), self, x['blobKey'].encode('ascii'))
-                        emptyResults.append(res)
-                        outputString += "(" + repr(count) + ") " + res.filename + "  "
-                        count = count + 1
-                else:
-                    raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
+            for x in self.keys:
+                modifiedName = x
+                res = result.Result(modifiedName, self, x)
+                emptyResults.append(res)
+                outputString += "(" + repr(count) + ") " + res.filename + "  "
+                count = count + 1
+            else:
+                raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
         else:
             print "This simulation has no id."
         

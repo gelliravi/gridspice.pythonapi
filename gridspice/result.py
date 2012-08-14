@@ -15,14 +15,11 @@ class Result:
     def __init__(self, name, simulation, blobkey):
         self.filename = name
         self.simulationId = simulation.id
-        self.APIKey = simulation.APIKey
         self.blobkey = blobkey
     
     def load (self):
         if (self.blobkey != None):
-            payload = {'id': self.blobkey}
-            headers = {'APIKey':self.APIKey}
-            r = requests.get(config.URL + "results/ids", params = payload, headers = headers)
+            r = requests.get(self.blobkey)
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
