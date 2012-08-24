@@ -33,7 +33,7 @@ class Model:
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
     def __init__(self, name, project=None, schematicType = SchematicType.DISTRIBUTION, mapType = MapType.POLITICAL, empty = 0):
-        if (project.id != None and project.id > 0):
+        if (project.id != None):
             self.id = None
             self.name = name
             self.loaded = 0
@@ -116,8 +116,8 @@ class Model:
         if (r.status_code == requests.codes.ok):
             data = r.text
             if (data != config.INVALID_API_KEY):
-                result = int(data)
-                if (result > 0):
+                if (data != "null"):
+                    result = int(data)
                     self.id = result
                     print self.name + " has been stored in the database."
                 else:
@@ -140,8 +140,8 @@ class Model:
         if (r.status_code == requests.codes.ok):
             data = r.text
             if (data != config.INVALID_API_KEY):
-                result = int(data)
-                if (result > 0):
+                if (data != "null"):
+                    result = int(data)
                     self.id = result
                     print self.name + " has been updated."
                 else:
@@ -173,8 +173,7 @@ class Model:
             if (r.status_code == requests.codes.ok):
                 data = r.text
                 if (data != config.INVALID_API_KEY):
-                    result = int(data)
-                    if (result == 1):
+                    if (data != "null"):
                         self.id = None
                         print self.name + " has been deleted from the database."
                     else:

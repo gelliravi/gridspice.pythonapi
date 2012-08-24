@@ -105,8 +105,8 @@ class Project:
 		if (r.status_code == requests.codes.ok):
 			data = r.text
 			if (data != config.INVALID_API_KEY):
-				result = int(data)
-				if (result > 0):
+				if (data != "null"):
+					result = int(data)
 					self.id = result
 					print self.name + " has been stored in the database."
 				else:
@@ -125,8 +125,8 @@ class Project:
 		if (r.status_code == requests.codes.ok):
 			data = r.text
 			if (data != config.INVALID_API_KEY):
-				result = int(data)
-				if (result > 0):
+				if (data != "null"):
+					result = int(data)
 					self.id = result
 					print self.name + " has been updated."
 				else:
@@ -158,8 +158,7 @@ class Project:
 			if (r.status_code == requests.codes.ok):
 				data = r.text
 				if (data != config.INVALID_API_KEY):
-					result = int(data)
-					if (result == 1):
+					if (data != "null"):
 						self.id = None
 						print self.name + " has been deleted from the database."
 					else:
