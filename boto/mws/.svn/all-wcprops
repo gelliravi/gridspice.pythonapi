@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/boto/boto.git/!svn/ver/4533/boto/mws
+END
+exception.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/mws/exception.py
+END
+response.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/mws/response.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/mws/__init__.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/mws/connection.py
+END

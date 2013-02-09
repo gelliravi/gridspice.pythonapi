@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/cloudformation
+END
+template.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/boto/boto.git/!svn/ver/4533/boto/cloudformation/template.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/boto/boto.git/!svn/ver/4533/boto/cloudformation/__init__.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/boto/boto.git/!svn/ver/4533/boto/cloudformation/connection.py
+END
+stack.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/boto/boto.git/!svn/ver/4533/boto/cloudformation/stack.py
+END

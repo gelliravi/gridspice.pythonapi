@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/boto/boto.git/!svn/ver/4533/boto/glacier
+END
+job.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/glacier/job.py
+END
+vault.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/glacier/vault.py
+END
+writer.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/glacier/writer.py
+END
+layer1.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/glacier/layer1.py
+END
+layer2.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/glacier/layer2.py
+END
+response.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/glacier/response.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/glacier/__init__.py
+END
+utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/glacier/utils.py
+END
+exceptions.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/glacier/exceptions.py
+END
+concurrent.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/glacier/concurrent.py
+END

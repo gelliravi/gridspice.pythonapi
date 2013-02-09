@@ -1,0 +1,14 @@
+__author__ = "Jimmy Du and Kyle Anderson"
+__copyright__ = "Copyright 2013, The GridSpice Project"
+__license__ = "BSD"
+__version__ = "1.0"
+__maintainer__ = ["Kyle Anderson", "Jimmy Du"]
+__email__ = ["kyle.anderson@stanford.edu", "jimmydu@stanford.edu"]
+__status__ = "Development"
+
+DEFAULT_TIMEZONE = "GMT"
+DEFAULT_DATE = "2000-01-01 00:00:00"
+DEFAULT_CLIMATE = "los angeles, ca"
+DEFAULT_MODULE_NAMES = ["Power Flow", "Residential", "Market", "Wholesale",
+            "Network", "Generators"]
+INVALID_API_KEY = "Invalid API Key"

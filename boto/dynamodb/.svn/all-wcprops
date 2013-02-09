@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/boto/boto.git/!svn/ver/4533/boto/dynamodb
+END
+layer1.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/layer1.py
+END
+item.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/item.py
+END
+layer2.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/layer2.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/__init__.py
+END
+schema.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/schema.py
+END
+batch.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/batch.py
+END
+exceptions.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/exceptions.py
+END
+types.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/types.py
+END
+condition.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/condition.py
+END
+table.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/dynamodb/table.py
+END

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/boto/boto.git/!svn/ver/4533/boto/cloudfront
+END
+identity.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/identity.py
+END
+signers.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/signers.py
+END
+exception.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/exception.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/__init__.py
+END
+distribution.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/distribution.py
+END
+invalidation.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/invalidation.py
+END
+logging.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/logging.py
+END
+object.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/object.py
+END
+origin.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/boto/boto.git/!svn/ver/4533/boto/cloudfront/origin.py
+END

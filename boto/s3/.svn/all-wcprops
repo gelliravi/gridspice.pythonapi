@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/boto/boto.git/!svn/ver/4533/boto/s3
+END
+keyfile.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/s3/keyfile.py
+END
+key.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/boto/boto.git/!svn/ver/4533/boto/s3/key.py
+END
+prefix.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/boto/boto.git/!svn/ver/4533/boto/s3/prefix.py
+END
+lifecycle.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/s3/lifecycle.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/s3/connection.py
+END
+acl.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/boto/boto.git/!svn/ver/4533/boto/s3/acl.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/s3/__init__.py
+END
+website.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/s3/website.py
+END
+resumable_download_handler.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/boto/boto.git/!svn/ver/4533/boto/s3/resumable_download_handler.py
+END
+deletemarker.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/s3/deletemarker.py
+END
+cors.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/boto/boto.git/!svn/ver/4533/boto/s3/cors.py
+END
+multidelete.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/s3/multidelete.py
+END
+bucket.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/boto/boto.git/!svn/ver/4533/boto/s3/bucket.py
+END
+user.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/boto/boto.git/!svn/ver/4533/boto/s3/user.py
+END
+tagging.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/s3/tagging.py
+END
+multipart.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/s3/multipart.py
+END
+bucketlogging.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/s3/bucketlogging.py
+END
+bucketlistresultset.py
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/boto/boto.git/!svn/ver/4533/boto/s3/bucketlistresultset.py
+END

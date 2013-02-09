@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/boto/boto.git/!svn/ver/4533/boto/beanstalk
+END
+layer1.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/beanstalk/layer1.py
+END
+exception.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/beanstalk/exception.py
+END
+response.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/beanstalk/response.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/beanstalk/__init__.py
+END
+wrapper.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/boto/boto.git/!svn/ver/4533/boto/beanstalk/wrapper.py
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/boto/boto.git/!svn/ver/4533/boto/mashups
+END
+order.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/mashups/order.py
+END
+interactive.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/mashups/interactive.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/mashups/__init__.py
+END
+iobject.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/mashups/iobject.py
+END
+server.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/mashups/server.py
+END

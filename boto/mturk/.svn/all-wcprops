@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/boto/boto.git/!svn/ver/4533/boto/mturk
+END
+qualification.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/mturk/qualification.py
+END
+layoutparam.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/boto/boto.git/!svn/ver/4533/boto/mturk/layoutparam.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/mturk/__init__.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/mturk/connection.py
+END
+price.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/mturk/price.py
+END
+notification.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/mturk/notification.py
+END
+question.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/mturk/question.py
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/boto/boto.git/!svn/ver/4533/boto/swf
+END
+layer1.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/swf/layer1.py
+END
+layer1_decisions.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/boto/boto.git/!svn/ver/4533/boto/swf/layer1_decisions.py
+END
+layer2.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/swf/layer2.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/swf/__init__.py
+END
+exceptions.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/swf/exceptions.py
+END

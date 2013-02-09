@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/boto/boto.git/!svn/ver/4533/boto/sns
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/sns/__init__.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/sns/connection.py
+END

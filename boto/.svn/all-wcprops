@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/boto/boto.git/!svn/ver/4533/boto
+END
+jsonresponse.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/jsonresponse.py
+END
+resultset.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/boto/boto.git/!svn/ver/4533/boto/resultset.py
+END
+provider.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/boto/boto.git/!svn/ver/4533/boto/provider.py
+END
+plugin.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/boto/boto.git/!svn/ver/4533/boto/plugin.py
+END
+exception.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/boto/boto.git/!svn/ver/4533/boto/exception.py
+END
+auth_handler.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/auth_handler.py
+END
+regioninfo.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/regioninfo.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/connection.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/boto/boto.git/!svn/ver/4533/boto/__init__.py
+END
+utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/boto/boto.git/!svn/ver/4533/boto/utils.py
+END
+auth.py
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/boto/boto.git/!svn/ver/4533/boto/auth.py
+END
+handler.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/boto/boto.git/!svn/ver/4533/boto/handler.py
+END
+https_connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/https_connection.py
+END
+storage_uri.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/storage_uri.py
+END
+compat.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/boto/boto.git/!svn/ver/4533/boto/compat.py
+END

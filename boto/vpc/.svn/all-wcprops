@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/boto/boto.git/!svn/ver/4533/boto/vpc
+END
+vpc.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/boto/boto.git/!svn/ver/4533/boto/vpc/vpc.py
+END
+dhcpoptions.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/vpc/dhcpoptions.py
+END
+internetgateway.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/vpc/internetgateway.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/vpc/__init__.py
+END
+subnet.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/vpc/subnet.py
+END
+customergateway.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/boto/boto.git/!svn/ver/4533/boto/vpc/customergateway.py
+END
+vpnconnection.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/boto/boto.git/!svn/ver/4533/boto/vpc/vpnconnection.py
+END
+vpngateway.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/vpc/vpngateway.py
+END
+routetable.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/vpc/routetable.py
+END

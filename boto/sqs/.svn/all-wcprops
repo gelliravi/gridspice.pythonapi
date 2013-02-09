@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/boto/boto.git/!svn/ver/4533/boto/sqs
+END
+jsonmessage.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/sqs/jsonmessage.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/sqs/__init__.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/sqs/connection.py
+END
+regioninfo.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/sqs/regioninfo.py
+END
+batchresults.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/sqs/batchresults.py
+END
+message.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/sqs/message.py
+END
+queue.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/boto/boto.git/!svn/ver/4533/boto/sqs/queue.py
+END
+attributes.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/sqs/attributes.py
+END

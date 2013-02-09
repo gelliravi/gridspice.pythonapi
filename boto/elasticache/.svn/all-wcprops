@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/boto/boto.git/!svn/ver/4533/boto/elasticache
+END
+layer1.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/elasticache/layer1.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/boto/boto.git/!svn/ver/4533/boto/elasticache/__init__.py
+END

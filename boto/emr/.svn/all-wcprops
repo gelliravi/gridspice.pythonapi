@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/boto/boto.git/!svn/ver/4533/boto/emr
+END
+bootstrap_action.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/boto/boto.git/!svn/ver/4533/boto/emr/bootstrap_action.py
+END
+emrobject.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/emr/emrobject.py
+END
+step.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/boto/boto.git/!svn/ver/4533/boto/emr/step.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/emr/__init__.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/emr/connection.py
+END
+instance_group.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/emr/instance_group.py
+END

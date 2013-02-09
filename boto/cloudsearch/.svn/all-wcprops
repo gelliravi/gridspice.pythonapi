@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch
+END
+optionstatus.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/optionstatus.py
+END
+layer1.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/layer1.py
+END
+document.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/document.py
+END
+layer2.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/layer2.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/__init__.py
+END
+sourceattribute.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/sourceattribute.py
+END
+search.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/search.py
+END
+domain.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/boto/boto.git/!svn/ver/4533/boto/cloudsearch/domain.py
+END

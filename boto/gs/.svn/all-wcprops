@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/boto/boto.git/!svn/ver/4533/boto/gs
+END
+key.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/boto/boto.git/!svn/ver/4533/boto/gs/key.py
+END
+bucket.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/boto/boto.git/!svn/ver/4533/boto/gs/bucket.py
+END
+user.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/boto/boto.git/!svn/ver/4533/boto/gs/user.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/gs/__init__.py
+END
+acl.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/boto/boto.git/!svn/ver/4533/boto/gs/acl.py
+END
+connection.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/gs/connection.py
+END
+resumable_upload_handler.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/boto/boto.git/!svn/ver/4533/boto/gs/resumable_upload_handler.py
+END
+bucketlistresultset.py
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/boto/boto.git/!svn/ver/4533/boto/gs/bucketlistresultset.py
+END
+cors.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/boto/boto.git/!svn/ver/4533/boto/gs/cors.py
+END

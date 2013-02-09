@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/boto/boto.git/!svn/ver/4533/boto/sdb/db
+END
+key.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/key.py
+END
+sequence.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/sequence.py
+END
+blob.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/blob.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/__init__.py
+END
+model.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/model.py
+END
+property.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/property.py
+END
+test_db.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/test_db.py
+END
+query.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/sdb/db/query.py
+END

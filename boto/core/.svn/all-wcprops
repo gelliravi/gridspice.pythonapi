@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/boto/boto.git/!svn/ver/4533/boto/core
+END
+credentials.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/boto/boto.git/!svn/ver/4533/boto/core/credentials.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/boto/boto.git/!svn/ver/4533/boto/core/__init__.py
+END
+service.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/boto/boto.git/!svn/ver/4533/boto/core/service.py
+END
+auth.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/boto/boto.git/!svn/ver/4533/boto/core/auth.py
+END
+dictresponse.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/boto/boto.git/!svn/ver/4533/boto/core/dictresponse.py
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/boto/boto.git/!svn/ver/4533/boto/core/README
+END
