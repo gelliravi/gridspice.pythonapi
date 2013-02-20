@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from boto.ec2.connection import EC2Connection
 import boto.ec2, os, math, sys, time, random, string
+from getpass import getpass
 
 __author__ = "Jimmy Du and Kyle Anderson"
 __copyright__ = "Copyright 2013, The GridSpice Project"
@@ -152,7 +153,7 @@ if __name__ == '__main__':
   asRoot = raw_input("Would you like to install as root? [y/n]: ")
   if (asRoot == "y"):
     key = raw_input("Please input your AWS Access Key: ");
-    value = raw_input("Please input your AWS Secret Key: ");
+    value = getpass("Please input your AWS Secret Key: ");
     key_pair_name = raw_input("Please input the name of your desired key_pair: ");
     print("\n");
     root_install(key, value, key_pair_name); 
