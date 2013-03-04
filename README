@@ -1,27 +1,28 @@
 GridSpice Installation
 
-One can register as either root or user.
+1] Run ./install.py
 
-To register as:
+   You will be prompted to install as either:
+	A) Root:
+    	1) Run root_install.py, providing the following three arguments:
+        	a. AWS Access Key
+        	b. AWS Secret Key
+        	c. A name to use as a key-pair. (If the key-pair does not
+           	exist, the script will automatically generate the key-pair.)
 
-A) Root:
-    1) Run root_install.py, providing the following three arguments:
-        a. AWS Access Key
-        b. AWS Secret Key
-        c. A name to use as a key-pair. (If the key-pair does not
-           exist, the script will automatically generate the key-pair.)
+    	2) You now have root access to your own GridSpice server, using the
+       	key-pair that you specified earlier.
 
-    2) You now have root access to your own GridSpice server, using the
-       key-pair that you specified earlier.
+    	3) You are given a Master API Key, which can be used to access any 
+       	account on your server through the GridSpice Python API.
 
-    3) You are given a Master API Key, which can be used to access any 
-       account on your server through the GridSpice Python API.
+	B) User:
+    	1) Run user_install.py, providing the following argument:
+        	a. URL on which your account is being hosted.  
 
-B) User:
-    1) Run user_install.py, providing the following argument:
-        a. URL on which your account is being hosted.  
+    	2) You now have access to your account on that server, using the 
+       		API key given to you by your host provider.  
 
-    2) You now have access to your account on that server, using the 
-       API key given to you by your host provider.  
+2] Run ./demo.py
 
 Thank you for using GridSpice!  
