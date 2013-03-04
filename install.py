@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from boto.ec2.connection import EC2Connection
+from boto.s3.connection import S3Connection
 import boto.ec2, os, math, sys, time, random, string
 from getpass import getpass
 
@@ -19,10 +20,11 @@ def root_install(accessKey, secretKey, key_name):
 	print(repr(steps) + "] Retrieving connection.\n");
 	steps += 1;
 	regionName = boto.ec2.get_region(region_name = 'us-west-1');
-	conn = EC2Connection(accessKey, secretKey, region = regionName);
+	conn_ec2 = EC2Connection(accessKey, secretKey, region = regionName);
+	conn_s3 = S3Connection(accessKey, secretKey);
 
 	# Creates Security Group
-	security_groups = conn.get_all_security_groups();
+	security_groups = conn_ec2.get_all_security_groups();
 	containsGridSpiceDev = False;
 	for group in security_groups:
 		if group.name == 'gridspice_dev':
@@ -31,15 +33,15 @@ def root_install(accessKey, secretKey, key_name):
 	if containsGridSpiceDev == False:
 		print(repr(steps) + "] Development security group not found. Creating one.\n");
 		steps += 1;
-		gridspice_dev = conn.create_security_group('gridspice_dev', 'GridSpice development')
+		gridspice_dev = conn_ec2.create_security_group('gridspice_dev', 'GridSpice development')
 		gridspice_dev.authorize('tcp', 80, 80, '0.0.0.0/0')
 		gridspice_dev.authorize('tcp', 22, 22, '0.0.0.0/0')
 
 	# Retrieves GridSpiceModelServer Image
-	imageObject = conn.get_image('ami-5e93b01b');
+	imageObject = conn_ec2.get_image('ami-32a78577');
 
 	# Creates a new keypair & stores private key.
-	key_pairs = conn.get_all_key_pairs();
+	key_pairs = conn_ec2.get_all_key_pairs();
 	found = False;
 	for x in key_pairs:
 		if (x.name == key_name):
@@ -47,14 +49,27 @@ def root_install(accessKey, secretKey, key_name):
 	if found == False:
 		print(repr(steps) + "] Key pair not found. Creating key-pair: \n");
 		steps += 1;
-		key_pair = conn.create_key_pair(key_name);
-		file_name = 'id_rsa-' + key_name;
+		key_pair = conn_ec2.create_key_pair(key_name);
+		file_name = key_name;
 		f = open(file_name, 'w');
 		f.write(key_pair.material);
 		f.close();
 		os.system("chmod 600 " + file_name);
 		os.system("mv " + file_name + " ~/.ssh/");
 		print("    ~/.ssh/" + file_name + "\n");
+
+	# Creates buckets
+	print(repr(steps) + "] Setting up buckets\n");
+	steps += 1;
+	buckets = conn_s3.get_all_buckets();
+	buckets_to_generate = ['org.gridspice.glm', 'org.gridspice.models', 'org.gridspice.results'];
+	for bucket_check in buckets_to_generate:
+		exists = False;
+		for bucket in buckets:
+			if (bucket.name == bucket_check):
+				exists = True;
+		if (exists == False):
+			conn_s3.create_bucket(bucket_check);     
 
 	# Creates instance from the image.
 	reservation = imageObject.run(key_name=key_name, security_groups = ['gridspice_dev']);
@@ -102,11 +117,24 @@ def root_install(accessKey, secretKey, key_name):
 
 	# Create config files on instance
 	steps += 1;
-	print(repr(steps) + "] Loading config files on remote server.\n");
+	print(repr(steps) + "] Loading config files on remote server:\n");
 	steps += 1;
-	command = "ssh -i ~/.ssh/id_rsa-" + key_name + " ec2-user@" + instance.public_dns_name + \
-              " python /home/ec2-user/.gridspice/setup.py " + accessKey + " " + secretKey + " " + masterKey;
-	os.system(command);
+	command1 = "scp -i ~/.ssh/" + key_name + " ~/.ssh/" + key_name + " ec2-user@" + \
+				instance.public_dns_name + ":~/.ssh/" + key_name;
+	os.system(command1);
+	print('\n');
+	command2 = "ssh -i ~/.ssh/" + key_name + " ec2-user@" + instance.public_dns_name + \
+				" python /home/ec2-user/.gridspice/setup.py " + accessKey + " " + \
+				secretKey + " " + masterKey + " " + key_name + " " + \
+				"http://" + instance.public_dns_name + "/";
+	os.system(command2);
+
+	# Starting compute cluster
+	print(repr(steps) + "] Spawning compute clusters:\n");
+	steps += 1;
+	command3 = "ssh -i ~/.ssh/" + key_name + " tomcat7@" + instance.public_dns_name + \
+				" python /opt/tomcat7/.gridspice/start_cluster.py";
+	os.system(command3);
 
 	# Creating local config file
 	print("\n");
@@ -135,7 +163,7 @@ def user_install(url):
 	with open('gridspice/config_template', 'r') as file:
 		data = file.readlines();
 		data += 'URL = "' + url + '"\n';
-	 
+		data += 'MASTER_KEY = None\n'; 
 	with open('gridspice/config.py', 'w') as file:
 		file.writelines(data);
 
