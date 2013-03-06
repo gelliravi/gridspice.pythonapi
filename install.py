@@ -38,7 +38,7 @@ def root_install(accessKey, secretKey, key_name):
 		gridspice_dev.authorize('tcp', 22, 22, '0.0.0.0/0')
 
 	# Retrieves GridSpiceModelServer Image
-	imageObject = conn_ec2.get_image('ami-32a78577');
+	imageObject = conn_ec2.get_image('ami-bcb89af9');
 
 	# Creates a new keypair & stores private key.
 	key_pairs = conn_ec2.get_all_key_pairs();
@@ -61,8 +61,13 @@ def root_install(accessKey, secretKey, key_name):
 	# Creates buckets
 	print(repr(steps) + "] Setting up buckets\n");
 	steps += 1;
+	char_set = string.ascii_lowercase + string.digits;
 	buckets = conn_s3.get_all_buckets();
-	buckets_to_generate = ['org.gridspice.glm', 'org.gridspice.models', 'org.gridspice.results'];
+	randString = ''.join(random.sample(char_set, 30));
+	bucket1 = 'org.gridspice.glm.' + randString;
+	bucket2 = 'org.gridspice.models.' + randString;
+	bucket3 = 'org.gridspice.results.' + randString;
+	buckets_to_generate = [bucket1, bucket2, bucket3];
 	for bucket_check in buckets_to_generate:
 		exists = False;
 		for bucket in buckets:
@@ -93,7 +98,7 @@ def root_install(accessKey, secretKey, key_name):
 
 	# Wait for 60 seconds to allow set-up to complete.
 	for i in range(0, 240):
-		time.sleep(0.5);
+		time.sleep(0.75);
 		bars = count % numBars;
 		progress = repr(steps) + '] Starting instance: |';
 		for x in range(0, bars):
@@ -126,7 +131,8 @@ def root_install(accessKey, secretKey, key_name):
 	command2 = "ssh -i ~/.ssh/" + key_name + " ec2-user@" + instance.public_dns_name + \
 				" python /home/ec2-user/.gridspice/setup.py " + accessKey + " " + \
 				secretKey + " " + masterKey + " " + key_name + " " + \
-				"http://" + instance.public_dns_name + "/";
+				"http://" + instance.public_dns_name + "/" + " " + bucket1 + " " + \
+				bucket2 + " " + bucket3;
 	os.system(command2);
 
 	# Starting compute cluster
@@ -147,6 +153,7 @@ def root_install(accessKey, secretKey, key_name):
 	  data += 'SECRET_KEY = ' + '"' + secretKey + '"\n';
 	  data += 'IMAGE_ID = ' + '"' + imageObject.name + '"\n';
 	  data += 'MASTER_KEY = ' + '"' + masterKey + '"\n';
+	  data += 'SSH_LOCATION = ' + '"' + '~/.ssh/' + key_name + '"\n';
 
 	with open('gridspice/config.py', 'w') as file:
 	  file.writelines(data);
@@ -155,7 +162,7 @@ def root_install(accessKey, secretKey, key_name):
 	print('    http://' + instance.public_dns_name + '/\n');
 
 # User installation
-def user_install(url):
+def user_install(url, username, password):
 	steps = 1;  
 	print(repr(steps) + "] Creating configuration file.\n");
 	steps += 1;
@@ -163,7 +170,11 @@ def user_install(url):
 	with open('gridspice/config_template', 'r') as file:
 		data = file.readlines();
 		data += 'URL = "' + url + '"\n';
-		data += 'MASTER_KEY = None\n'; 
+		data += 'MASTER_KEY = None\n';
+		data += 'SSH_LOCATION = None\n';
+		data += 'USER_NAME = ' + username + '\n';
+		data += 'PASSWORD = ' + password + '\n';		
+ 
 	with open('gridspice/config.py', 'w') as file:
 		file.writelines(data);
 
@@ -187,5 +198,7 @@ if __name__ == '__main__':
     root_install(key, value, key_pair_name); 
   else:
     url = raw_input("Please input the url on which your server is being hosted: ");
+    username = raw_input("Please input username: ");
+    password = getpass("Please enter password: ");
     print("\n");
-    user_install(url);
+    user_install(url, username, password);
