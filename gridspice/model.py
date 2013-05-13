@@ -12,6 +12,7 @@ import json
 import requests
 import element
 import json
+import parser
 
 class SchematicType:
     """
@@ -33,7 +34,9 @@ class Model:
       The GridSpice model contains the network model (transmission, distribution, etc)
     """
     def __init__(self, name, project=None, schematicType = SchematicType.DISTRIBUTION, mapType = MapType.POLITICAL, empty = 0):
-        if (project.id != None):
+        if (project == None):
+            self.name = name
+        elif (project.id != None):
             self.id = None
             self.name = name
             self.loaded = 0
@@ -46,7 +49,6 @@ class Model:
                 self.schematicType = schematicType
                 self.mapType = mapType
                 self.loaded = 1
-                
         else:
             raise ValueError("'" + project.name + "'"  + " has not yet been stored.")
 
@@ -75,11 +77,17 @@ class Model:
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
 
 
-    def load(self):
+    def load(self, file_path=None):
         """
             fills in the other information to the model object
     	"""
-        if (self.id != None):
+        if (file_path != None):
+            self.elementDict = []
+            self.glm_file = parser.GlmFile(file_path)
+            self.elementDict.extend(self.glm_file.objects);	
+            self.loaded = 1
+            print self.name + " has been loaded."	
+        elif (self.id != None):
             payload = {'id':self.id}
             headers = {'APIKey':self.APIKey}
             r = requests.get(config.URL + "models/ids", params = payload, headers = headers)
@@ -100,10 +108,9 @@ class Model:
                 else:
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
         else:
-            print self.name + " has not yet been stored in the database."
+            print self.name + " has not yet been stored in the database."            
             
-            
-    def _store(self):  
+    def _store(self): 
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
         headers = {'APIKey':self.APIKey}
@@ -210,4 +217,12 @@ class Model:
         """
     	   Returns a copy of this model within the provided project.
         """
+
+    def sync(self, file_path = None):
+        """
+           Syncs with the file
+        """
+        self.glm_file.objects = self.elementDict
+        self.glm_file.store(file_path)
+
 

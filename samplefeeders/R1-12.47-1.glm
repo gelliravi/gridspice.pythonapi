@@ -1,0 +1,27 @@
+// $Id: R1-12.47-1.glm 
+// 12.5 kV feeder 
+//********************************************* 
+clock{ 
+     timestamp '2000-01-01 0:00:00'; 
+     stoptime '2000-01-01 1:00:00'; 
+     timezone EST+8EDT; 
+} 
+
+#set profiler=1 
+//********************************************* 
+// modules 
+module tape; 
+module powerflow{ 
+     solver_method NR; 
+      default_maximum_voltage_error 1e-6;
+}; 
+
+//********************************************* 
+object node:4383 { 
+     name R1-12-47-1_reg_1; 
+     from R1-12-47-1_node_617; 
+     to R1-12-47-1_meter_21; 
+     phases ABCN; 
+     configuration feeder_reg_cfg; 
+} 
+
