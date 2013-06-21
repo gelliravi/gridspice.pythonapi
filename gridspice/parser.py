@@ -32,40 +32,40 @@ class TextBlock:
 class GlmFile:
 	def __init__(self, file_name):
 		with open(file_name) as file:
-			content = file.readlines();
-
+			self.content = file.readlines();
+	'''
 		# File Properties
 		linenum = 0;
-		numlines = len(content);
+		numlines = len(self.content);
 		self.file_path = file_name;
 		self.clock = ''; 
 		self.modules = []; 
 		self.objects = []; 
 
 		while(linenum < numlines):
-			line = content[linenum];
+			line = self.content[linenum];
 			brackets = 0;
 
 			# Save clock block
 			if (line.startswith('clock')):
-				block = TextBlock(content, linenum);
+				block = TextBlock(self.content, linenum);
 				self.clock = block.string;
 				linenum = block.lineno;
 			# Save module blocks
 			elif (line.startswith('module')):
-				block = TextBlock(content, linenum);
+				block = TextBlock(self.content, linenum);
 				self.modules.append(block.string);
 				linenum = block.lineno;
 			# Save object blocks
 			elif (line.startswith('object')):
-				block = TextBlock(content, linenum);
+				block = TextBlock(self.content, linenum);
 				obj = self._parseElem(block.string);
 				if (obj != None):
 					self.objects.append(obj);
 				linenum = block.lineno;
 			else:
 				linenum += 1;
-
+	'''
 	def _parseElem(self, object_text):
 		object_block = object_text.split('\n');
 		header = object_block[0];

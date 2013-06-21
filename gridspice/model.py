@@ -13,6 +13,7 @@ import requests
 import element
 import json
 import parser
+import simulation
 
 class SchematicType:
     """
@@ -84,7 +85,10 @@ class Model:
         if (file_path != None):
             self.elementDict = []
             self.glm_file = parser.GlmFile(file_path)
-            self.elementDict.extend(self.glm_file.objects);	
+            #self.elementDict.extend(self.glm_file.objects);
+            self.glm_data = '';
+            for line in self.glm_file.content:
+                self.glm_data += line	
             self.loaded = 1
             print self.name + " has been loaded."	
         elif (self.id != None):
@@ -225,4 +229,22 @@ class Model:
         self.glm_file.objects = self.elementDict
         self.glm_file.store(file_path)
 
-
+    # Temporary until parsing is implemented
+    def runSimulation(self):
+        simulationResult = None
+        if (self.id != None):
+            headers = {'APIKey': self.APIKey}
+            payload = urllib.urlencode({'id': self.projectId, 'schematicId': self.id, 'glm':self.glm_data})
+            r = requests.post(config.URL + "simulations/create", data = payload, headers = headers)
+            if (r.status_code == requests.codes.ok):
+                data = r.text
+                print(data)
+                if (data != config.INVALID_API_KEY):
+                    simulationResult = simulation.Simulation(int(data), self)
+                else:
+                    raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
+            else:
+                print "Error in the server."
+        else:
+            print "This project has not yet been stored."
+        return simulationResult   

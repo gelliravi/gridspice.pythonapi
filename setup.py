@@ -38,7 +38,7 @@ def root_install(accessKey, secretKey, key_name):
 		gridspice_dev.authorize('tcp', 22, 22, '0.0.0.0/0')
 
 	# Retrieves GridSpiceModelServer Image
-	imageObject = conn_ec2.get_image('ami-bcb89af9');
+	imageObject = conn_ec2.get_image('ami-bc3b12f9');
 
 	# Creates a new keypair & stores private key.
 	key_pairs = conn_ec2.get_all_key_pairs();
@@ -124,23 +124,13 @@ def root_install(accessKey, secretKey, key_name):
 	steps += 1;
 	print(repr(steps) + "] Loading config files on remote server:\n");
 	steps += 1;
-	command1 = "scp -i ~/.ssh/" + key_name + " ~/.ssh/" + key_name + " ec2-user@" + \
-				instance.public_dns_name + ":~/.ssh/" + key_name;
-	os.system(command1);
-	print('\n');
-	command2 = "ssh -i ~/.ssh/" + key_name + " ec2-user@" + instance.public_dns_name + \
+	command = "ssh -t -i ~/.ssh/" + key_name + " ec2-user@" + instance.public_dns_name + \
 				" python /home/ec2-user/.gridspice/setup.py " + accessKey + " " + \
 				secretKey + " " + masterKey + " " + key_name + " " + \
 				"http://" + instance.public_dns_name + "/" + " " + bucket1 + " " + \
 				bucket2 + " " + bucket3;
-	os.system(command2);
-
-	# Starting compute cluster
-	print(repr(steps) + "] Spawning compute clusters:\n");
-	steps += 1;
-	command3 = "ssh -i ~/.ssh/" + key_name + " tomcat7@" + instance.public_dns_name + \
-				" python /opt/tomcat7/.gridspice/start_cluster.py";
-	os.system(command3);
+	os.system(command); 
+	print('\n');
 
 	# Creating local config file
 	print("\n");
@@ -189,16 +179,8 @@ if __name__ == '__main__':
   print(" =========================== \n");
 
   # Asks whether user wants to install as root
-  asRoot = raw_input("Would you like to install as root? [y/n]: ")
-  if (asRoot == "y"):
-    key = raw_input("Please input your AWS Access Key: ");
-    value = getpass("Please input your AWS Secret Key: ");
-    key_pair_name = raw_input("Please input the name of your desired key_pair: ");
-    print("\n");
-    root_install(key, value, key_pair_name); 
-  else:
-    url = raw_input("Please input the url on which your server is being hosted: ");
-    username = raw_input("Please input username: ");
-    password = getpass("Please enter password: ");
-    print("\n");
-    user_install(url, username, password);
+  key = raw_input("Please input your AWS Access Key: ");
+  value = getpass("Please input your AWS Secret Key: ");
+  key_pair_name = raw_input("Please input the name of your desired key_pair: ");
+  print("\n");
+  root_install(key, value, key_pair_name); 

@@ -29,5 +29,9 @@ def simulate(directory):
 			myScp.put(zip_path, '~/');
 		else:
 			os.system('scp -i ' + config.SSH_LOCATION + ' ' + zip_path + ' ec2-user@' + url + ':~/');
+		# Run simulation, the results of which will be stored under '/username/timestamp/results'
 	else:
 		raise ValueError("'" + directory + "'"  + " is not an absolute pathname.")
+	# Returns link to address
+
+
