@@ -40,7 +40,6 @@ class Simulation:
                     self.lastHeartbeat = jsonSimulation['lastHeartbeat'].encode('ascii')
                     self.timestamp = jsonSimulation['date'].encode('ascii')
                     self.message = jsonSimulation['message'].encode('ascii')
-                    self.xmlRequest = jsonSimulation['xmlRequest'].encode('ascii')
                     self.status = jsonSimulation['status'].encode('ascii')
                 else:
                     raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
