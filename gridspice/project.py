@@ -100,7 +100,7 @@ class Project:
 		dictCopy = self.__dict__.copy()
 		del dictCopy['APIKey']
 		payload = urllib.urlencode(dictCopy)
-		headers = {'APIKey':self.APIKey}
+		headers = {'APIKey':self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
 		r = requests.post(config.URL + "projects/create", data=payload, headers = headers)
 		if (r.status_code == requests.codes.ok):
 			data = r.text
@@ -120,7 +120,7 @@ class Project:
 		dictCopy = self.__dict__.copy()
 		del dictCopy['APIKey']
 		payload = urllib.urlencode(dictCopy)
-		headers = {'APIKey': self.APIKey}
+		headers = {'APIKey': self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
 		r = requests.post(config.URL + "projects/update", data=payload, headers = headers)
 		if (r.status_code == requests.codes.ok):
 			data = r.text
@@ -181,7 +181,7 @@ class Project:
 		"""
 		simulationResult = None
 		if (self.id != None):
-			headers = {'APIKey': self.APIKey}
+			headers = {'APIKey': self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
 			payload = urllib.urlencode({'id': self.id})
 			r = requests.post(config.URL + "simulations/create", data = payload, headers = headers)
 			if (r.status_code == requests.codes.ok):
