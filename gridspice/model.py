@@ -117,7 +117,7 @@ class Model:
     def _store(self): 
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
-		headers = {'APIKey':self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
+        headers = {'APIKey':self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
         elementDictCopy = map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." + x.__class__.__name__)}.items()), dictCopy['elementDict'])
         jsonElems = json.dumps(elementDictCopy)
         dictCopy['elementDict'] = jsonElems
@@ -141,7 +141,7 @@ class Model:
     def _update(self):
         dictCopy = self.__dict__.copy()
         del dictCopy['APIKey']
-		headers = {'APIKey':self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
+        headers = {'APIKey':self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
         elementDictCopy = map(lambda x: dict(x.__dict__.items() + {"objectType":(x.__class__.__module__ +"." + x.__class__.__name__)}.items()), dictCopy['elementDict'])
         jsonElems = json.dumps(elementDictCopy)
         dictCopy['elementDict'] = jsonElems
@@ -233,7 +233,7 @@ class Model:
     def runSimulation(self):
         simulationResult = None
         if (self.id != None):
-			headers = {'APIKey': self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
+            headers = {'APIKey': self.APIKey, 'content-type':'application/x-www-form-urlencoded'}
             payload = urllib.urlencode({'id': self.projectId, 'schematicId': self.id, 'glm':self.glm_data})
             r = requests.post(config.URL + "simulations/create", data = payload, headers = headers)
             if (r.status_code == requests.codes.ok):
