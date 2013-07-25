@@ -131,7 +131,7 @@ class Schedule:
 		if (level != None):
 			self._populateEntries(startEntry, endEntry, level)
 		else:
-			raise ValueException('End time is not later than start time.')
+			raise ValueError('End time is not later than start time.')
 
 	def _parseCronToScheduleEntry(self, string):
 		stringSplit = string.split(' ')
