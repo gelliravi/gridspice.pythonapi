@@ -109,13 +109,14 @@ class Schedule:
 		unit = level_to_unit[level_limit]
 		startVal = startEntry.__dict__[unit]
 		endVal = endEntry.__dict__[unit]
-		levelVal = startVal + '-' + endVal
-		middleEntry = copy.deepcopy(startEntry)
-		middleEntry.__dict__[unit] = levelVal
-		for i in range(0, level_limit):
-			lower_unit = level_to_unit[i]
-			middleEntry.__dict__[lower_unit] = '*'
-		self.scheduleEntries.append(middleEntry)
+		if (startVal > endVal - 1):
+			levelVal = startVal + '-' + repr(endVal - 1)
+			middleEntry = copy.deepcopy(startEntry)
+			middleEntry.__dict__[unit] = levelVal
+			for i in range(0, level_limit):
+				lower_unit = level_to_unit[i]
+				middleEntry.__dict__[lower_unit] = '*'
+			self.scheduleEntries.append(middleEntry)
 
 		# Bottom entries
 		for i in range(level_limit - 1, -1, -1):

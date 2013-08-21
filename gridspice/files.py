@@ -6,9 +6,14 @@ __maintainer__ = ["Kyle Anderson", "Jimmy Du"]
 __email__ = ["kyle.anderson@stanford.edu", "jimmydu@stanford.edu"]
 __status__ = "Development"
 
+import requests
+import config
+
 class File:
-	def __init__(self, name, project, empty=0):
+	def __init__(self, name, project, filepath=None, empty=0):
 		self.name = name
+		if (self.name[-4:] != '.glm'):
+			self.name += '.glm'
 		self.id = None
 		if (project.__class__.__name__ != 'Project'):
 			raise ValueError("Invalid project inputted.")
@@ -16,6 +21,9 @@ class File:
 		self.APIKey = project.APIKey
 		self.content = None
 		self.loaded = 0
+		if (filepath != None):
+			with open(filepath) as fileImport:
+				self.content = fileImport.read()
 		if (empty == 0):
 			self.loaded = 1
 
@@ -32,16 +40,27 @@ class File:
 					print self.name + " has been loaded."
 				else:
 					raise ValueError("'" + self.APIKey + "'" + " is not a valid API key.")
-		else:
-			print self.name + " has not yet been stored in the database."
-
-	def import(self, filepath):
-		with (filepath) open as fileImport:
-			self.content = fileImport.read()
+			else:
+				print self.name + " has not yet been stored in the database."
 
 	# TODO: Use multiform post
 	def _store(self):
-		pass
+		headers = {'APIKey':self.APIKey}
+		files = {repr(self.projectId): (self.name, self.content)}
+		r = requests.post(config.URL + "files/create", files=files, headers = headers)
+		if (r.status_code == requests.codes.ok):
+			data = r.text
+			if (data != config.INVALID_API_KEY):
+				if (data != "null"):
+					result = int(data)
+					self.id = result
+					print self.name + " has been stored in the database."
+				else:
+					print "Error saving. A different version of this file already exists. Has '" + self.name + "' been loaded?"
+			else:
+				raise ValueError("'" + self.APIKey + "'"  + " is not a valid API key.")
+		else:
+			print "Error in the server."
 
 	# TODO: Use multiform post
 	def _update(self):
@@ -71,4 +90,4 @@ class File:
 			else:
 					raise ValueError("'" + self.APIKey + "'" + " is not a valid API key.")
 		else:
-			print self.name + "has not yet been stored int eh database."
+			print self.name + "has not yet been stored in the database."
