@@ -109,7 +109,7 @@ class Schedule:
 		unit = level_to_unit[level_limit]
 		startVal = startEntry.__dict__[unit]
 		endVal = endEntry.__dict__[unit]
-		if (startVal > endVal - 1):
+		if (int(startVal) > endVal - 1):
 			levelVal = startVal + '-' + repr(endVal - 1)
 			middleEntry = copy.deepcopy(startEntry)
 			middleEntry.__dict__[unit] = levelVal
