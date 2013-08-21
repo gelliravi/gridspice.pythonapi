@@ -119,8 +119,7 @@ class Schedule:
 			self.scheduleEntries.append(middleEntry)
 
 		# Bottom entries
-		for i in range(level_limit - 2, -1, -1):
-			self._addEditedEndEntry(endEntry, i)
+		self._addEditedEndEntry(endEntry, 0)
 
 	# Adds schedule entrie(s) to schedule by filling the gap between starttime and endtime
 	def addEntries(self, starttime, endtime, value):
