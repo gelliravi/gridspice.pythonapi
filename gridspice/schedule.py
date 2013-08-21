@@ -110,7 +110,7 @@ class Schedule:
 		startVal = startEntry.__dict__[unit]
 		endVal = endEntry.__dict__[unit]
 		if (int(startVal) < (int(endVal) - 1)):
-			levelVal = startVal + '-' + repr(int(endVal) - 1)
+			levelVal = repr(int(startVal) + 1) + '-' + repr(int(endVal) - 1)
 			middleEntry = copy.deepcopy(startEntry)
 			middleEntry.__dict__[unit] = levelVal
 			for i in range(0, level_limit):
@@ -119,7 +119,7 @@ class Schedule:
 			self.scheduleEntries.append(middleEntry)
 
 		# Bottom entries
-		for i in range(level_limit - 1, -1, -1):
+		for i in range(level_limit - 2, -1, -1):
 			self._addEditedEndEntry(endEntry, i)
 
 	# Adds schedule entrie(s) to schedule by filling the gap between starttime and endtime
