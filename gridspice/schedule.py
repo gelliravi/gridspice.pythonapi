@@ -124,9 +124,9 @@ class Schedule:
 	# Adds schedule entrie(s) to schedule by filling the gap between starttime and endtime
 	def addEntries(self, starttime, endtime, value):
 		startEntry = ScheduleEntry(repr(int(starttime.minute)), repr(int(starttime.hour)), \
-						repr(int(starttime.day)), repr(int(starttime.month)), '*', repr(int(value)))
+						repr(int(starttime.day)), repr(int(starttime.month)), '*', repr(value))
 		endEntry = ScheduleEntry(repr(int(endtime.minute)), repr(int(endtime.hour)), \
-							repr(int(endtime.day)), repr(int(endtime.month)), '*', repr(int(value)))
+							repr(int(endtime.day)), repr(int(endtime.month)), '*', repr(value))
 		level = self._findHighestDiffLevel(startEntry, endEntry)  
 		if (level != None):
 			self._populateEntries(startEntry, endEntry, level)
