@@ -154,7 +154,7 @@ class Schedule:
 	def toGLM(self):
 		glm = 'schedule ' + self.name + ' {\n'
 		for entry in self.scheduleEntries:
-			glm += '	' + entry.toString() + '\n'
+			glm += '	' + entry.toString() + ';\n'
 		glm += '}\n'
 		return glm
 
