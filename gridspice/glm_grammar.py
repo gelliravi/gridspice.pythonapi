@@ -22,15 +22,14 @@ POUND = Literal('#')
 word = Word(alphas + "'.")
 number = Word(nums)
 unit = word
-comment = COMMENT_START + SkipTo(NEW_LINE)
-value = oneOf([word, number]) + Optional(unit)
-property_ = attribute + value + SEMI_COLON  
-properties = OneOrMore(oneOf([property_, object_block]))
-properties_block = OPEN_BRACKET + properties + CLOSE_BRACKET
-module_block = MODULE + word + Optional(properties_block) + SEMI_COLON
-object_block = OBJECT + word + COLON + number + properties
-clock_block = CLOCK + properties
-macro = POUND + SkipTo(NEW_LINE, include=True) 
-glm_file = OneOrMore(oneOf([comment, module_block, object_block, clock_block, macro])
-
-
+attribute = word
+comment = Group(COMMENT_START + SkipTo(NEW_LINE))
+value = Group((word | number) + Optional(unit))
+property_ = Group(attribute + value + SEMI_COLON)  
+properties = Group(OneOrMore(property_)) # Currently no support for nested objects
+properties_block = Group(OPEN_BRACKET + properties + CLOSE_BRACKET)
+module_block = Group(MODULE + word + Optional(properties_block) + SEMI_COLON)
+object_block = Group(OBJECT + word + COLON + number + properties)
+clock_block = Group(CLOCK + properties)
+macro = Group(POUND + SkipTo(NEW_LINE))
+glm_file = Group(OneOrMore(comment | module_block | object_block | clock_block | macro))

@@ -7,17 +7,18 @@ __email__ = ["kyle.anderson@stanford.edu", "jimmydu@stanford.edu"]
 __status__ = "Development"
 
 from pyparsing import *
-import glm_grammer
+import glm_grammar
 
 class Parser:
 
-	@classmethod
-	def generateObjects(self, filepath):
+	@staticmethod
+	def parseGLM(filepath):
 		objects = []
-		with open(self.filepath) as glm_file:
-			pass
+		with open(filepath) as glm_file:
+			content = glm_file.read()
+			objects = glm_grammar.glm_file.parseString(content)
 		return objects
 
-	@classmethod
-	def generateGLM(self, objects, filepath):
+	@staticmethod
+	def generateGLM(objects, filepath):
 		pass
