@@ -37,7 +37,7 @@ identifier = Group(number).setResultsName('identifier')
 unit = Group(word).setResultsName('unit')
 name = Group(Word(alphas+nums+'-_')).setResultsName('name')
 attribute = Group(name).setResultsName('attribute')
-comment = Suppress(Group(COMMENT_START + SkipTo(NEW_LINE)).setResultsName('comment'))
+comment = Group(COMMENT_START + SkipTo(NEW_LINE)).setResultsName('comment')
 value = Group((name + Optional(unit)) ^ timestamp ^ timezone).setResultsName('value')
 
 # Property block
@@ -50,4 +50,4 @@ module_block = Group(MODULE + name + Optional(properties_block) + SEMI_COLON).se
 object_block = Group(OBJECT + name + Optional(COLON + identifier) + properties_block).setResultsName('object_block')
 clock_block = Group(CLOCK + properties_block).setResultsName('clock_block')
 macro = Group(POUND + SkipTo(NEW_LINE)).setResultsName('macro')
-glm_file = Group(OneOrMore(comment ^ module_block ^ object_block ^ clock_block ^ macro))
+glm_file = Group(OneOrMore(module_block ^ object_block ^ clock_block ^ macro))

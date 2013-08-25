@@ -16,6 +16,7 @@ class Parser:
 		objects = []
 		with open(filepath) as glm_file:
 			content = glm_file.read()
+			glm_grammar.glm_file.ignore(glm_grammar.comment)
 			objects = glm_grammar.glm_file.parseString(content)
 		return objects
 
