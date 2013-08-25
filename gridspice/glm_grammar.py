@@ -28,10 +28,10 @@ word = Word(alphas)
 number = Word(nums)
 
 # Clock properties
-date = Group(Word(nums, exact=4) + DASH + Word(nums, exact=2) + DASH + Word(nums, exact=2)).setResultsName('date') 
-time = Group(Word(nums, max=2) + COLON + Word(nums, exact=2) + COLON + Word(nums, exact=2)).setResultsName('time')
+date = Combine(Word(nums, exact=4) + DASH + Word(nums, exact=2) + DASH + Word(nums, exact=2)).setResultsName('date') 
+time = Combine(Word(nums, max=2) + COLON + Word(nums, exact=2) + COLON + Word(nums, exact=2)).setResultsName('time')
 timestamp = Group(APOSTROPHE + date + time + APOSTROPHE).setResultsName('timestamp')
-timezone = Group(word + PLUS + number + word).setResultsName('timezone') 
+timezone = Combine(word + PLUS + number + word).setResultsName('timezone') 
 
 identifier = Group(number).setResultsName('identifier')
 unit = Group(word).setResultsName('unit')
@@ -50,4 +50,4 @@ module_block = Group(MODULE + name + Optional(properties_block) + SEMI_COLON).se
 object_block = Group(OBJECT + name + Optional(COLON + identifier) + properties_block).setResultsName('object_block')
 clock_block = Group(CLOCK + properties_block).setResultsName('clock_block')
 macro = Group(POUND + SkipTo(NEW_LINE)).setResultsName('macro')
-glm_file = Group(OneOrMore(module_block ^ object_block ^ clock_block ^ macro))
+glm_file = Group(ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro))
