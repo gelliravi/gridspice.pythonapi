@@ -50,4 +50,4 @@ module_block = Group(MODULE + name + Optional(properties_block) + SEMI_COLON).se
 object_block = Group(OBJECT + name + Optional(COLON + identifier) + properties_block).setResultsName('object_block')
 clock_block = Group(CLOCK + properties_block).setResultsName('clock_block')
 macro = Group(POUND + SkipTo(NEW_LINE)).setResultsName('macro')
-glm_file = Group(ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro))
+glm_file = Group(ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro)) + stringEnd
