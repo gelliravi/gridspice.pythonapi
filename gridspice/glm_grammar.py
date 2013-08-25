@@ -35,19 +35,25 @@ timezone = Combine(word + PLUS + number + word).setResultsName('timezone')
 
 identifier = Group(number).setResultsName('identifier')
 unit = Group(word).setResultsName('unit')
-name = Group(Word(alphas+nums+'-_')).setResultsName('name')
+name = Group(Word(alphas+nums+'-_*(,.)')).setResultsName('name')
 attribute = Group(name).setResultsName('attribute')
 comment = Group(COMMENT_START + SkipTo(NEW_LINE)).setResultsName('comment')
 value = Group((name + Optional(unit)) ^ timestamp ^ timezone).setResultsName('value')
 
 # Property block
 property_ = Group(attribute + value + SEMI_COLON).setResultsName('property')  
-properties = Group(OneOrMore(property_)).setResultsName('properties') # Currently no support for nested objects
-properties_block = Group(OPEN_BRACKET + properties + CLOSE_BRACKET).setResultsName('properties_block')
+properties = Forward()
+properties_block = Group(OPEN_BRACKET + properties + CLOSE_BRACKET + Optional(SEMI_COLON)).setResultsName('properties_block')
 
 # File Blocks
-module_block = Group(MODULE + name + Optional(properties_block) + SEMI_COLON).setResultsName('module_block')
+module_block = Group(MODULE + name + Optional(properties_block)).setResultsName('module_block')
 object_block = Group(OBJECT + name + Optional(COLON + identifier) + properties_block).setResultsName('object_block')
 clock_block = Group(CLOCK + properties_block).setResultsName('clock_block')
 macro = Group(POUND + SkipTo(NEW_LINE)).setResultsName('macro')
 glm_file = Group(ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro)) + stringEnd
+
+# Initialization
+properties << Group(OneOrMore(property_ | object_block)).setResultsName('properties')
+glm_file.ignore(comment)
+
+
