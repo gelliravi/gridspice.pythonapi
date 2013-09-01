@@ -33,27 +33,26 @@ time = Combine(Word(nums, max=2) + COLON + Word(nums, exact=2) + COLON + Word(nu
 timestamp = Group(APOSTROPHE + date + time + APOSTROPHE).setResultsName('timestamp')
 timezone = Combine(word + PLUS + number + word).setResultsName('timezone') 
 
-identifier = Group(number).setResultsName('identifier')
-unit = Group(word).setResultsName('unit')
-name = Group(Word(alphas+nums+'-_*(,.)')).setResultsName('name')
-attribute = Group(name).setResultsName('attribute')
+identifier = number.setResultsName('identifier')
+unit = word.setResultsName('unit')
+name = Word(alphas+nums+'-_*(,.):+/,"').setResultsName('name')
+attribute = name.setResultsName('attribute')
 comment = Group(COMMENT_START + SkipTo(NEW_LINE)).setResultsName('comment')
-value = Group((name + Optional(unit)) ^ timestamp ^ timezone).setResultsName('value')
+value = (Group(name + Optional(unit)) ^ timestamp ^ timezone).setResultsName('value')
 
 # Property block
-property_ = Group(attribute + value + SEMI_COLON).setResultsName('property')  
+property_ = Group(attribute + value + SEMI_COLON).setResultsName('property', listAllMatches=True)  
 properties = Forward()
-properties_block = Group(OPEN_BRACKET + properties + CLOSE_BRACKET + Optional(SEMI_COLON)).setResultsName('properties_block')
 
 # File Blocks
-module_block = Group(MODULE + name + Optional(properties_block)).setResultsName('module_block')
-object_block = Group(OBJECT + name + Optional(COLON + identifier) + properties_block).setResultsName('object_block')
-clock_block = Group(CLOCK + properties_block).setResultsName('clock_block')
-macro = Group(POUND + SkipTo(NEW_LINE)).setResultsName('macro')
-glm_file = Group(ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro)) + stringEnd
+module_block = Group(MODULE + name + Optional(properties) + SEMI_COLON).setResultsName('modules', listAllMatches=True)
+object_block = Group(OBJECT + name + Optional(COLON + identifier) + properties + Optional(SEMI_COLON)).setResultsName('objects', listAllMatches=True)
+clock_block = Group(CLOCK + properties).setResultsName('clock')
+macro = Group(POUND + SkipTo(NEW_LINE)).setResultsName('macros', listAllMatches=True)
+glm_file = ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro) + stringEnd
 
 # Initialization
-properties << Group(OneOrMore(property_ | object_block)).setResultsName('properties')
+properties << Group(OPEN_BRACKET + OneOrMore(property_ | object_block) + CLOSE_BRACKET).setResultsName('properties')
 glm_file.ignore(comment)
 
 
