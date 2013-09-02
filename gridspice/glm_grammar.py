@@ -40,20 +40,22 @@ name = Word(alphas+nums+'-_*(,.):+/,"').setResultsName('name')
 attribute = name.setResultsName('attribute')
 comment = Group(COMMENT_START + SkipTo(NEW_LINE)).setResultsName('comment')
 value = (Group(name + Optional(unit)) ^ timestamp ^ timezone).setResultsName('value')
+object_type = Word(alphas+'_').setResultsName('type')
+identity = (COLON + identifier).setParseAction(lambda s: s[1:])
 
 # Property block
-property_ = Group((attribute + value + SEMI_COLON).setParseAction(lambda s: s[:-1])).setResultsName('property', listAllMatches=True)  
+property_ = (attribute + value + SEMI_COLON).setParseAction(lambda s: s[:-1]).setResultsName('properties', listAllMatches=True)  
 properties = Forward()
 
 # File Blocks
 module_block = Group((MODULE + name + Optional(properties) + SEMI_COLON).setParseAction(lambda s,l,t: t[1:-1])).setResultsName('modules', listAllMatches=True)
-object_block = Group((OBJECT + name + Optional(COLON + identifier) + properties).setParseAction(lambda s,l,t: t[1:])).setResultsName('objects', listAllMatches=True)
-recorder_block = Group((OBJECT + RECORDER + Optional(COLON + identifier) + properties + SEMI_COLON).setParseAction(lambda s,l,t: t[1:-1])).setResultsName('recorders', listAllMatches=True)
+object_block = Group((OBJECT + object_type + Optional(identity) + properties).setParseAction(lambda s,l,t: t[1:])).setResultsName('objects', listAllMatches=True)
+recorder_block = Group((OBJECT + RECORDER + Optional(identity) + properties + SEMI_COLON).setParseAction(lambda s,l,t: t[1:-1])).setResultsName('recorders', listAllMatches=True)
 clock_block = Group((CLOCK + properties).setParseAction(lambda s,l,t: t[1:])).setResultsName('clock')
 macro = Group((POUND + SkipTo(NEW_LINE)).setParseAction(lambda s: s[1:])).setResultsName('macros', listAllMatches=True)
 glm_file = ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro ^ recorder_block) + stringEnd
 
 # Initialization
-properties << Group((OPEN_BRACKET + OneOrMore(property_ | object_block) + CLOSE_BRACKET).setParseAction(lambda s: s[1:-1])).setResultsName('properties')
+properties << (OPEN_BRACKET + OneOrMore(property_ | object_block) + CLOSE_BRACKET).setParseAction(lambda s: s[1:-1])
 glm_file.ignore(comment)
 
