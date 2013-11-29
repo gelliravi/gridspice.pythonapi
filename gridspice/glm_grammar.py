@@ -49,10 +49,10 @@ properties = Forward()
 
 # File Blocks
 module_block = Group(MODULE + name('module_name') + Optional(properties) + SEMI_COLON).setResultsName('modules') #List
-object_block = Group(OBJECT + object_type + Optional(identity) + properties).setResultsName('objects') #List
-recorder_block = Group(OBJECT + RECORDER + Optional(identity) + properties + SEMI_COLON).setResultsName('recorders') #List
+object_block = Dict(Group(OBJECT + object_type + Optional(identity) + properties)).setResultsName('objects', listAllMatches=True) #List
+recorder_block = Dict(Group(OBJECT + RECORDER + Optional(identity) + properties + SEMI_COLON)).setResultsName('recorders', listAllMatches=True) #List
 clock_block = Group(CLOCK + properties).setResultsName('clock')
-macro = Group(POUND + SkipTo(NEW_LINE)('macro_content')).setResultsName('macros') #List
+macro = Dict(Group(POUND + SkipTo(NEW_LINE)('macro_content'))).setResultsName('macros', listAllMatches=True) #List
 glm_file = ZeroOrMore(module_block ^ object_block ^ clock_block ^ macro ^ recorder_block) + stringEnd
 
 # Initialization

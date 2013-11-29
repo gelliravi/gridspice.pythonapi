@@ -7862,7 +7862,7 @@ object transformer_configuration:1726 {
       shunt_impedance 339.610+381.628j;
 } 
 
-object triplex_line_conductor: { 
+object triplex_line_conductor { 
      name triplex_4/0 AA; 
      resistance 0.48; 
      geometric_mean_radius 0.0158; 
